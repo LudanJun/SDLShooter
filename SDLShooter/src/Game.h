@@ -18,12 +18,16 @@
 /// 例如，在游戏中可以有多个场景，如主菜单、游戏进行中、游戏结束等
 /// 每个场景都可以继承自Scene类，并实现init、update、render、clean和handleEvent方法
 /// 这样，游戏可以通过调用这些方法来管理不同的场景，实现场景的切换和管理
-/// 这种设计模式使得代码更加模块化和可维护 
+/// 这种设计模式使得代码更加模块化和可维护
 class Game
 {
-public: // 公共接口
-    // 构造函数
-    Game();
+    // 公共接口
+public:
+    // 单例模式，获取游戏实例 推荐引用 Game &getInstance()
+    static Game &getInstance(){
+        static Game instance; // 静态实例
+        return instance; // 返回实例引用
+    };
     // 析构函数
     ~Game();
     // 游戏运行
@@ -42,7 +46,13 @@ public: // 公共接口
     // 渲染游戏画面
     void render();
 
-private:                              // 私有成员
+private:
+    // 构造函数
+    Game();
+    //删除拷贝与构造函数
+    Game(const Game&) = delete ; // 禁止拷贝构造函数
+    Game& operator=(const Game&) = delete; // 禁止赋值构造函数
+    // 私有成员
     bool isRunning = true;            // 游戏是否运行
     Scene *currentScene = nullptr;    // 保存当前游戏场景  在 run函数中切换
     SDL_Window *window = nullptr;     // 游戏窗口对象 后面常用
