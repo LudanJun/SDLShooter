@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/hoooooo/Documents/C++/SDLShooter/src/Game.cpp" "CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o" "gcc" "CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o.d"
-  "/Users/hoooooo/Documents/C++/SDLShooter/src/SceneMain.cpp" "CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o" "gcc" "CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o.d"
-  "/Users/hoooooo/Documents/C++/SDLShooter/src/main.cpp" "CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o" "gcc" "CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o.d"
+  "/Users/apple/SDLShooter/SDLShooter/src/Game.cpp" "CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o" "gcc" "CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o.d"
+  "/Users/apple/SDLShooter/SDLShooter/src/SceneMain.cpp" "CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o" "gcc" "CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o.d"
+  "/Users/apple/SDLShooter/SDLShooter/src/main.cpp" "CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o" "gcc" "CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

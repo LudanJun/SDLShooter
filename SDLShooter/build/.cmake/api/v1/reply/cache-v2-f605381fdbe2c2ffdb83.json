@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/hoooooo/Documents/C++/SDLShooter/build"
+			"value" : "/Users/apple/SDLShooter/SDLShooter/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -158,8 +158,8 @@
 					"value" : "CXX compiler"
 				}
 			],
-			"type" : "FILEPATH",
-			"value" : "/usr/bin/c++"
+			"type" : "STRING",
+			"value" : "/usr/bin/clang++"
 		},
 		{
 			"name" : "CMAKE_CXX_FLAGS",
@@ -254,8 +254,8 @@
 					"value" : "C compiler"
 				}
 			],
-			"type" : "FILEPATH",
-			"value" : "/usr/bin/cc"
+			"type" : "STRING",
+			"value" : "/usr/bin/clang"
 		},
 		{
 			"name" : "CMAKE_C_FLAGS",
@@ -491,7 +491,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/hoooooo/Documents/C++/SDLShooter/build/CMakeFiles/pkgRedirects"
+			"value" : "/Users/apple/SDLShooter/SDLShooter/build/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -551,7 +551,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/hoooooo/Documents/C++/SDLShooter"
+			"value" : "/Users/apple/SDLShooter/SDLShooter"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -1215,7 +1215,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[/opt/homebrew/lib/libFLAC.dylib][/opt/homebrew/include][v()]"
+			"value" : "[/opt/homebrew/Cellar/flac/1.5.0/lib/libFLAC.dylib][/opt/homebrew/Cellar/flac/1.5.0/include][v()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_FluidSynth",
@@ -1227,7 +1227,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[/opt/homebrew/lib/libfluidsynth.dylib][/opt/homebrew/include][v()]"
+			"value" : "[/opt/homebrew/Cellar/fluid-synth/2.4.6/lib/libfluidsynth.dylib][/opt/homebrew/Cellar/fluid-synth/2.4.6/include][v()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_JPEG",
@@ -1251,7 +1251,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[/opt/homebrew/lib/libopusfile.dylib][/opt/homebrew/include/opus][v()]"
+			"value" : "[/opt/homebrew/Cellar/opusfile/0.12_1/lib/libopusfile.dylib][/opt/homebrew/Cellar/opusfile/0.12_1/include/opus][v()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_PNG",
@@ -1287,7 +1287,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[/opt/homebrew/lib/libvorbisfile.dylib][/opt/homebrew/include][v()]"
+			"value" : "[/opt/homebrew/Cellar/libvorbis/1.3.7/lib/libvorbisfile.dylib][/opt/homebrew/Cellar/libvorbis/1.3.7/include][v()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_ZLIB",
@@ -1323,7 +1323,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[/opt/homebrew/lib/libxmp.dylib][/opt/homebrew/include][v()]"
+			"value" : "[/opt/homebrew/Cellar/libxmp/4.6.3/lib/libxmp.dylib][/opt/homebrew/Cellar/libxmp/4.6.3/include][v()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_mpg123",
@@ -1335,7 +1335,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[/opt/homebrew/lib/libmpg123.dylib][/opt/homebrew/include][v()]"
+			"value" : "[/opt/homebrew/Cellar/mpg123/1.32.10/lib/libmpg123.dylib][/opt/homebrew/Cellar/mpg123/1.32.10/include][v()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_wavpack",
@@ -1383,7 +1383,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/opt/homebrew/include"
+			"value" : "/opt/homebrew/Cellar/flac/1.5.0/include"
 		},
 		{
 			"name" : "FLAC_LIBRARY",
@@ -1395,7 +1395,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/lib/libFLAC.dylib"
+			"value" : "/opt/homebrew/Cellar/flac/1.5.0/lib/libFLAC.dylib"
 		},
 		{
 			"name" : "FLAC_LINK_DIRECTORIES",
@@ -1407,7 +1407,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/flac/1.5.0/lib"
 		},
 		{
 			"name" : "FLAC_LINK_LIBRARIES",
@@ -1443,7 +1443,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : ""
+			"value" : "-D_DARWIN_C_SOURCE"
 		},
 		{
 			"name" : "FluidSynth_INCLUDE_PATH",
@@ -1455,7 +1455,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/opt/homebrew/include"
+			"value" : "/opt/homebrew/Cellar/fluid-synth/2.4.6/include"
 		},
 		{
 			"name" : "FluidSynth_LIBRARY",
@@ -1467,7 +1467,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/lib/libfluidsynth.dylib"
+			"value" : "/opt/homebrew/Cellar/fluid-synth/2.4.6/lib/libfluidsynth.dylib"
 		},
 		{
 			"name" : "FluidSynth_LINK_DIRECTORIES",
@@ -1479,7 +1479,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/fluid-synth/2.4.6/lib"
 		},
 		{
 			"name" : "FluidSynth_LINK_LIBRARIES",
@@ -1591,7 +1591,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/opt/homebrew/include/opus"
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1/include/opus"
 		},
 		{
 			"name" : "OpusFile_LIBRARY",
@@ -1603,7 +1603,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/lib/libopusfile.dylib"
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1/lib/libopusfile.dylib"
 		},
 		{
 			"name" : "OpusFile_LINK_DIRECTORIES",
@@ -1615,7 +1615,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1/lib"
 		},
 		{
 			"name" : "OpusFile_LINK_LIBRARIES",
@@ -1651,7 +1651,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/flac/1.5.0/include;-I/opt/homebrew/Cellar/libogg/1.3.5/include"
 		},
 		{
 			"name" : "PC_FLAC_CFLAGS_I",
@@ -1687,10 +1687,46 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "1"
 		},
 		{
 			"name" : "PC_FLAC_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/flac/1.5.0/include"
+		},
+		{
+			"name" : "PC_FLAC_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/flac/1.5.0/include;/opt/homebrew/Cellar/libogg/1.3.5/include"
+		},
+		{
+			"name" : "PC_FLAC_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/flac/1.5.0/lib;-lFLAC"
+		},
+		{
+			"name" : "PC_FLAC_LDFLAGS_OTHER",
 			"properties" : 
 			[
 				{
@@ -1711,7 +1747,31 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/flac/1.5.0/lib"
+		},
+		{
+			"name" : "PC_FLAC_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "FLAC"
+		},
+		{
+			"name" : "PC_FLAC_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/flac/1.5.0/lib"
 		},
 		{
 			"name" : "PC_FLAC_LIBS",
@@ -1771,7 +1831,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "flac"
 		},
 		{
 			"name" : "PC_FLAC_PREFIX",
@@ -1783,7 +1843,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/flac/1.5.0"
 		},
 		{
 			"name" : "PC_FLAC_STATIC_CFLAGS",
@@ -1795,7 +1855,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/flac/1.5.0/include;-I/opt/homebrew/Cellar/libogg/1.3.5/include"
 		},
 		{
 			"name" : "PC_FLAC_STATIC_CFLAGS_I",
@@ -1822,6 +1882,42 @@
 			"value" : ""
 		},
 		{
+			"name" : "PC_FLAC_STATIC_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/flac/1.5.0/include;/opt/homebrew/Cellar/libogg/1.3.5/include"
+		},
+		{
+			"name" : "PC_FLAC_STATIC_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/flac/1.5.0/lib;-lFLAC;-lm;-L/opt/homebrew/Cellar/libogg/1.3.5/lib;-logg"
+		},
+		{
+			"name" : "PC_FLAC_STATIC_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
 			"name" : "PC_FLAC_STATIC_LIBDIR",
 			"properties" : 
 			[
@@ -1832,6 +1928,30 @@
 			],
 			"type" : "INTERNAL",
 			"value" : ""
+		},
+		{
+			"name" : "PC_FLAC_STATIC_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "FLAC;m;ogg"
+		},
+		{
+			"name" : "PC_FLAC_STATIC_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/flac/1.5.0/lib;/opt/homebrew/Cellar/libogg/1.3.5/lib"
 		},
 		{
 			"name" : "PC_FLAC_STATIC_LIBS",
@@ -1891,6 +2011,54 @@
 				}
 			],
 			"type" : "INTERNAL",
+			"value" : "1.5.0"
+		},
+		{
+			"name" : "PC_FLAC_flac_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_FLAC_flac_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_FLAC_flac_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_FLAC_flac_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
 			"value" : ""
 		},
 		{
@@ -1903,7 +2071,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/fluid-synth/2.4.6/include;-I/opt/homebrew/Cellar/glib/2.84.2/include;-I/opt/homebrew/Cellar/glib/2.84.2/include/glib-2.0;-I/opt/homebrew/Cellar/glib/2.84.2/lib/glib-2.0/include;-I/opt/homebrew/opt/gettext/include;-I/opt/homebrew/Cellar/pcre2/10.45/include;-I/opt/homebrew/Cellar/libsndfile/1.2.2_1/include;-I/opt/homebrew/Cellar/flac/1.5.0/include;-I/opt/homebrew/Cellar/libvorbis/1.3.7/include;-I/opt/homebrew/Cellar/libogg/1.3.5/include;-I/opt/homebrew/Cellar/opus/1.5.2/include/opus;-I/opt/homebrew/Cellar/mpg123/1.32.10/include;-I/opt/homebrew/Cellar/portaudio/19.7.0/include;-I/opt/homebrew/Cellar/readline/8.2.13/include;-D_DARWIN_C_SOURCE"
 		},
 		{
 			"name" : "PC_FLUIDSYNTH_CFLAGS_I",
@@ -1927,7 +2095,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-D_DARWIN_C_SOURCE"
 		},
 		{
 			"name" : "PC_FLUIDSYNTH_FOUND",
@@ -1939,10 +2107,46 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "1"
 		},
 		{
 			"name" : "PC_FLUIDSYNTH_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/fluid-synth/2.4.6/include"
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/fluid-synth/2.4.6/include;/opt/homebrew/Cellar/glib/2.84.2/include;/opt/homebrew/Cellar/glib/2.84.2/include/glib-2.0;/opt/homebrew/Cellar/glib/2.84.2/lib/glib-2.0/include;/opt/homebrew/opt/gettext/include;/opt/homebrew/Cellar/pcre2/10.45/include;/opt/homebrew/Cellar/libsndfile/1.2.2_1/include;/opt/homebrew/Cellar/flac/1.5.0/include;/opt/homebrew/Cellar/libvorbis/1.3.7/include;/opt/homebrew/Cellar/libogg/1.3.5/include;/opt/homebrew/Cellar/opus/1.5.2/include/opus;/opt/homebrew/Cellar/mpg123/1.32.10/include;/opt/homebrew/Cellar/portaudio/19.7.0/include;/opt/homebrew/Cellar/readline/8.2.13/include"
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/fluid-synth/2.4.6/lib;-lfluidsynth"
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_LDFLAGS_OTHER",
 			"properties" : 
 			[
 				{
@@ -1963,7 +2167,31 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/fluid-synth/2.4.6/lib"
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "fluidsynth"
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/fluid-synth/2.4.6/lib"
 		},
 		{
 			"name" : "PC_FLUIDSYNTH_LIBS",
@@ -2023,7 +2251,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "fluidsynth"
 		},
 		{
 			"name" : "PC_FLUIDSYNTH_PREFIX",
@@ -2035,7 +2263,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/fluid-synth/2.4.6"
 		},
 		{
 			"name" : "PC_FLUIDSYNTH_STATIC_CFLAGS",
@@ -2047,7 +2275,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/fluid-synth/2.4.6/include;-I/opt/homebrew/Cellar/glib/2.84.2/include;-I/opt/homebrew/Cellar/glib/2.84.2/include/glib-2.0;-I/opt/homebrew/Cellar/glib/2.84.2/lib/glib-2.0/include;-I/opt/homebrew/opt/gettext/include;-I/opt/homebrew/Cellar/pcre2/10.45/include;-I/opt/homebrew/Cellar/libsndfile/1.2.2_1/include;-I/opt/homebrew/Cellar/flac/1.5.0/include;-I/opt/homebrew/Cellar/libvorbis/1.3.7/include;-I/opt/homebrew/Cellar/libogg/1.3.5/include;-I/opt/homebrew/Cellar/opus/1.5.2/include/opus;-I/opt/homebrew/Cellar/mpg123/1.32.10/include;-I/opt/homebrew/Cellar/portaudio/19.7.0/include;-I/opt/homebrew/Cellar/readline/8.2.13/include;-D_DARWIN_C_SOURCE"
 		},
 		{
 			"name" : "PC_FLUIDSYNTH_STATIC_CFLAGS_I",
@@ -2071,7 +2299,43 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-D_DARWIN_C_SOURCE"
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_STATIC_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/fluid-synth/2.4.6/include;/opt/homebrew/Cellar/glib/2.84.2/include;/opt/homebrew/Cellar/glib/2.84.2/include/glib-2.0;/opt/homebrew/Cellar/glib/2.84.2/lib/glib-2.0/include;/opt/homebrew/opt/gettext/include;/opt/homebrew/Cellar/pcre2/10.45/include;/opt/homebrew/Cellar/libsndfile/1.2.2_1/include;/opt/homebrew/Cellar/flac/1.5.0/include;/opt/homebrew/Cellar/libvorbis/1.3.7/include;/opt/homebrew/Cellar/libogg/1.3.5/include;/opt/homebrew/Cellar/opus/1.5.2/include/opus;/opt/homebrew/Cellar/mpg123/1.32.10/include;/opt/homebrew/Cellar/portaudio/19.7.0/include;/opt/homebrew/Cellar/readline/8.2.13/include"
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_STATIC_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/fluid-synth/2.4.6/lib;-lfluidsynth;-lm;-Wl,-framework,CoreAudio,-framework,AudioUnit;-Wl,-framework,CoreMIDI,-framework,CoreServices;-L/opt/homebrew/Cellar/glib/2.84.2/lib;-lgthread-2.0;-lglib-2.0;-L/opt/homebrew/opt/gettext/lib;-lintl;-liconv;-lm;-framework;Foundation;-framework;CoreFoundation;-framework;AppKit;-framework;Carbon;-L/opt/homebrew/Cellar/pcre2/10.45/lib;-lpcre2-8;-D_THREAD_SAFE;-pthread;-L/opt/homebrew/Cellar/libsndfile/1.2.2_1/lib;-lsndfile;-lmp3lame;-L/opt/homebrew/Cellar/flac/1.5.0/lib;-lFLAC;-lm;-L/opt/homebrew/Cellar/libvorbis/1.3.7/lib;-lvorbisenc;-lvorbis;-lm;-L/opt/homebrew/Cellar/libogg/1.3.5/lib;-logg;-L/opt/homebrew/Cellar/opus/1.5.2/lib;-lopus;-L/opt/homebrew/Cellar/mpg123/1.32.10/lib;-lmpg123;-L/opt/homebrew/Cellar/portaudio/19.7.0/lib;-lportaudio;-framework;CoreAudio;-framework;AudioToolbox;-framework;AudioUnit;-framework;CoreFoundation;-framework;CoreServices;-L/opt/homebrew/Cellar/readline/8.2.13/lib;-lreadline;-L/usr/lib;-lncurses"
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_STATIC_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-Wl,-framework,CoreAudio,-framework,AudioUnit;-Wl,-framework,CoreMIDI,-framework,CoreServices;-framework;Foundation;-framework;CoreFoundation;-framework;AppKit;-framework;Carbon;-D_THREAD_SAFE;-pthread;-framework;CoreAudio;-framework;AudioToolbox;-framework;AudioUnit;-framework;CoreFoundation;-framework;CoreServices"
 		},
 		{
 			"name" : "PC_FLUIDSYNTH_STATIC_LIBDIR",
@@ -2084,6 +2348,30 @@
 			],
 			"type" : "INTERNAL",
 			"value" : ""
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_STATIC_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "fluidsynth;m;gthread-2.0;glib-2.0;intl;iconv;m;pcre2-8;sndfile;mp3lame;FLAC;m;vorbisenc;vorbis;m;ogg;opus;mpg123;portaudio;readline;ncurses"
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_STATIC_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/fluid-synth/2.4.6/lib;/opt/homebrew/Cellar/glib/2.84.2/lib;/opt/homebrew/opt/gettext/lib;/opt/homebrew/Cellar/pcre2/10.45/lib;/opt/homebrew/Cellar/libsndfile/1.2.2_1/lib;/opt/homebrew/Cellar/flac/1.5.0/lib;/opt/homebrew/Cellar/libvorbis/1.3.7/lib;/opt/homebrew/Cellar/libogg/1.3.5/lib;/opt/homebrew/Cellar/opus/1.5.2/lib;/opt/homebrew/Cellar/mpg123/1.32.10/lib;/opt/homebrew/Cellar/portaudio/19.7.0/lib;/opt/homebrew/Cellar/readline/8.2.13/lib;/usr/lib"
 		},
 		{
 			"name" : "PC_FLUIDSYNTH_STATIC_LIBS",
@@ -2143,6 +2431,54 @@
 				}
 			],
 			"type" : "INTERNAL",
+			"value" : "2.4.6"
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_fluidsynth_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_fluidsynth_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_fluidsynth_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_FLUIDSYNTH_fluidsynth_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
 			"value" : ""
 		},
 		{
@@ -2155,7 +2491,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/mpg123/1.32.10/include"
 		},
 		{
 			"name" : "PC_MPG123_CFLAGS_I",
@@ -2191,10 +2527,46 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "1"
 		},
 		{
 			"name" : "PC_MPG123_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/mpg123/1.32.10/include"
+		},
+		{
+			"name" : "PC_MPG123_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/mpg123/1.32.10/include"
+		},
+		{
+			"name" : "PC_MPG123_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/mpg123/1.32.10/lib;-lmpg123"
+		},
+		{
+			"name" : "PC_MPG123_LDFLAGS_OTHER",
 			"properties" : 
 			[
 				{
@@ -2215,7 +2587,31 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/mpg123/1.32.10/lib"
+		},
+		{
+			"name" : "PC_MPG123_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "mpg123"
+		},
+		{
+			"name" : "PC_MPG123_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/mpg123/1.32.10/lib"
 		},
 		{
 			"name" : "PC_MPG123_LIBS",
@@ -2275,7 +2671,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "libmpg123"
 		},
 		{
 			"name" : "PC_MPG123_PREFIX",
@@ -2287,7 +2683,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/mpg123/1.32.10"
 		},
 		{
 			"name" : "PC_MPG123_STATIC_CFLAGS",
@@ -2299,7 +2695,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/mpg123/1.32.10/include"
 		},
 		{
 			"name" : "PC_MPG123_STATIC_CFLAGS_I",
@@ -2326,6 +2722,42 @@
 			"value" : ""
 		},
 		{
+			"name" : "PC_MPG123_STATIC_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/mpg123/1.32.10/include"
+		},
+		{
+			"name" : "PC_MPG123_STATIC_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/mpg123/1.32.10/lib;-lmpg123"
+		},
+		{
+			"name" : "PC_MPG123_STATIC_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
 			"name" : "PC_MPG123_STATIC_LIBDIR",
 			"properties" : 
 			[
@@ -2336,6 +2768,30 @@
 			],
 			"type" : "INTERNAL",
 			"value" : ""
+		},
+		{
+			"name" : "PC_MPG123_STATIC_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "mpg123"
+		},
+		{
+			"name" : "PC_MPG123_STATIC_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/mpg123/1.32.10/lib"
 		},
 		{
 			"name" : "PC_MPG123_STATIC_LIBS",
@@ -2395,6 +2851,54 @@
 				}
 			],
 			"type" : "INTERNAL",
+			"value" : "1.32.10"
+		},
+		{
+			"name" : "PC_MPG123_libmpg123_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_MPG123_libmpg123_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_MPG123_libmpg123_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_MPG123_libmpg123_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
 			"value" : ""
 		},
 		{
@@ -2407,7 +2911,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/opusfile/0.12_1/include/opus;-I/opt/homebrew/Cellar/libogg/1.3.5/include;-I/opt/homebrew/Cellar/opus/1.5.2/include/opus"
 		},
 		{
 			"name" : "PC_OPUSFILE_CFLAGS_I",
@@ -2443,10 +2947,46 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "1"
 		},
 		{
 			"name" : "PC_OPUSFILE_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1/include"
+		},
+		{
+			"name" : "PC_OPUSFILE_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1/include/opus;/opt/homebrew/Cellar/libogg/1.3.5/include;/opt/homebrew/Cellar/opus/1.5.2/include/opus"
+		},
+		{
+			"name" : "PC_OPUSFILE_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/opusfile/0.12_1/lib;-lopusfile"
+		},
+		{
+			"name" : "PC_OPUSFILE_LDFLAGS_OTHER",
 			"properties" : 
 			[
 				{
@@ -2467,7 +3007,31 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1/lib"
+		},
+		{
+			"name" : "PC_OPUSFILE_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "opusfile"
+		},
+		{
+			"name" : "PC_OPUSFILE_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1/lib"
 		},
 		{
 			"name" : "PC_OPUSFILE_LIBS",
@@ -2527,7 +3091,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "opusfile"
 		},
 		{
 			"name" : "PC_OPUSFILE_PREFIX",
@@ -2539,7 +3103,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1"
 		},
 		{
 			"name" : "PC_OPUSFILE_STATIC_CFLAGS",
@@ -2551,7 +3115,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/opusfile/0.12_1/include/opus;-I/opt/homebrew/Cellar/libogg/1.3.5/include;-I/opt/homebrew/Cellar/opus/1.5.2/include/opus"
 		},
 		{
 			"name" : "PC_OPUSFILE_STATIC_CFLAGS_I",
@@ -2578,6 +3142,42 @@
 			"value" : ""
 		},
 		{
+			"name" : "PC_OPUSFILE_STATIC_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1/include/opus;/opt/homebrew/Cellar/libogg/1.3.5/include;/opt/homebrew/Cellar/opus/1.5.2/include/opus"
+		},
+		{
+			"name" : "PC_OPUSFILE_STATIC_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/opusfile/0.12_1/lib;-lopusfile;-L/opt/homebrew/Cellar/libogg/1.3.5/lib;-logg;-L/opt/homebrew/Cellar/opus/1.5.2/lib;-lopus"
+		},
+		{
+			"name" : "PC_OPUSFILE_STATIC_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
 			"name" : "PC_OPUSFILE_STATIC_LIBDIR",
 			"properties" : 
 			[
@@ -2588,6 +3188,30 @@
 			],
 			"type" : "INTERNAL",
 			"value" : ""
+		},
+		{
+			"name" : "PC_OPUSFILE_STATIC_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "opusfile;ogg;opus"
+		},
+		{
+			"name" : "PC_OPUSFILE_STATIC_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1/lib;/opt/homebrew/Cellar/libogg/1.3.5/lib;/opt/homebrew/Cellar/opus/1.5.2/lib"
 		},
 		{
 			"name" : "PC_OPUSFILE_STATIC_LIBS",
@@ -2647,6 +3271,54 @@
 				}
 			],
 			"type" : "INTERNAL",
+			"value" : "0.12"
+		},
+		{
+			"name" : "PC_OPUSFILE_opusfile_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_OPUSFILE_opusfile_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_OPUSFILE_opusfile_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_OPUSFILE_opusfile_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
 			"value" : ""
 		},
 		{
@@ -2659,7 +3331,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/libvorbis/1.3.7/include;-I/opt/homebrew/Cellar/libogg/1.3.5/include"
 		},
 		{
 			"name" : "PC_VORBIS_CFLAGS_I",
@@ -2695,10 +3367,46 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "1"
 		},
 		{
 			"name" : "PC_VORBIS_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/libvorbis/1.3.7/include"
+		},
+		{
+			"name" : "PC_VORBIS_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/libvorbis/1.3.7/include;/opt/homebrew/Cellar/libogg/1.3.5/include"
+		},
+		{
+			"name" : "PC_VORBIS_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/libvorbis/1.3.7/lib;-lvorbisfile"
+		},
+		{
+			"name" : "PC_VORBIS_LDFLAGS_OTHER",
 			"properties" : 
 			[
 				{
@@ -2719,7 +3427,31 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/libvorbis/1.3.7/lib"
+		},
+		{
+			"name" : "PC_VORBIS_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "vorbisfile"
+		},
+		{
+			"name" : "PC_VORBIS_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/libvorbis/1.3.7/lib"
 		},
 		{
 			"name" : "PC_VORBIS_LIBS",
@@ -2779,7 +3511,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "vorbisfile"
 		},
 		{
 			"name" : "PC_VORBIS_PREFIX",
@@ -2791,7 +3523,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/libvorbis/1.3.7"
 		},
 		{
 			"name" : "PC_VORBIS_STATIC_CFLAGS",
@@ -2803,7 +3535,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/libvorbis/1.3.7/include;-I/opt/homebrew/Cellar/libogg/1.3.5/include"
 		},
 		{
 			"name" : "PC_VORBIS_STATIC_CFLAGS_I",
@@ -2830,6 +3562,42 @@
 			"value" : ""
 		},
 		{
+			"name" : "PC_VORBIS_STATIC_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/libvorbis/1.3.7/include;/opt/homebrew/Cellar/libogg/1.3.5/include"
+		},
+		{
+			"name" : "PC_VORBIS_STATIC_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/libvorbis/1.3.7/lib;-lvorbisfile;-lvorbis;-lm;-L/opt/homebrew/Cellar/libogg/1.3.5/lib;-logg"
+		},
+		{
+			"name" : "PC_VORBIS_STATIC_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
 			"name" : "PC_VORBIS_STATIC_LIBDIR",
 			"properties" : 
 			[
@@ -2840,6 +3608,30 @@
 			],
 			"type" : "INTERNAL",
 			"value" : ""
+		},
+		{
+			"name" : "PC_VORBIS_STATIC_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "vorbisfile;vorbis;m;ogg"
+		},
+		{
+			"name" : "PC_VORBIS_STATIC_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/libvorbis/1.3.7/lib;/opt/homebrew/Cellar/libogg/1.3.5/lib"
 		},
 		{
 			"name" : "PC_VORBIS_STATIC_LIBS",
@@ -2899,6 +3691,54 @@
 				}
 			],
 			"type" : "INTERNAL",
+			"value" : "1.3.7"
+		},
+		{
+			"name" : "PC_VORBIS_vorbisfile_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_VORBIS_vorbisfile_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_VORBIS_vorbisfile_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_VORBIS_vorbisfile_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
 			"value" : ""
 		},
 		{
@@ -2911,7 +3751,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/libxmp/4.6.3/include"
 		},
 		{
 			"name" : "PC_XMP_CFLAGS_I",
@@ -2947,10 +3787,46 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "1"
 		},
 		{
 			"name" : "PC_XMP_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/libxmp/4.6.3/include"
+		},
+		{
+			"name" : "PC_XMP_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/libxmp/4.6.3/include"
+		},
+		{
+			"name" : "PC_XMP_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/libxmp/4.6.3/lib;-lxmp"
+		},
+		{
+			"name" : "PC_XMP_LDFLAGS_OTHER",
 			"properties" : 
 			[
 				{
@@ -2971,7 +3847,31 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/libxmp/4.6.3/lib"
+		},
+		{
+			"name" : "PC_XMP_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "xmp"
+		},
+		{
+			"name" : "PC_XMP_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/libxmp/4.6.3/lib"
 		},
 		{
 			"name" : "PC_XMP_LIBS",
@@ -3031,7 +3931,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "libxmp"
 		},
 		{
 			"name" : "PC_XMP_PREFIX",
@@ -3043,7 +3943,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/libxmp/4.6.3"
 		},
 		{
 			"name" : "PC_XMP_STATIC_CFLAGS",
@@ -3055,7 +3955,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "-I/opt/homebrew/Cellar/libxmp/4.6.3/include"
 		},
 		{
 			"name" : "PC_XMP_STATIC_CFLAGS_I",
@@ -3082,6 +3982,42 @@
 			"value" : ""
 		},
 		{
+			"name" : "PC_XMP_STATIC_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/libxmp/4.6.3/include"
+		},
+		{
+			"name" : "PC_XMP_STATIC_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/libxmp/4.6.3/lib;-lxmp"
+		},
+		{
+			"name" : "PC_XMP_STATIC_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
 			"name" : "PC_XMP_STATIC_LIBDIR",
 			"properties" : 
 			[
@@ -3092,6 +4028,30 @@
 			],
 			"type" : "INTERNAL",
 			"value" : ""
+		},
+		{
+			"name" : "PC_XMP_STATIC_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "xmp"
+		},
+		{
+			"name" : "PC_XMP_STATIC_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/libxmp/4.6.3/lib"
 		},
 		{
 			"name" : "PC_XMP_STATIC_LIBS",
@@ -3151,6 +4111,54 @@
 				}
 			],
 			"type" : "INTERNAL",
+			"value" : "4.6.3"
+		},
+		{
+			"name" : "PC_XMP_libxmp_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_XMP_libxmp_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_XMP_libxmp_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_XMP_libxmp_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
 			"value" : ""
 		},
 		{
@@ -3183,7 +4191,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "PKG_CONFIG_EXECUTABLE-NOTFOUND"
+			"value" : "/opt/homebrew/bin/pkg-config"
 		},
 		{
 			"name" : "PNG_LIBRARY_DEBUG",
@@ -3291,7 +4299,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/hoooooo/Documents/C++/SDLShooter/build"
+			"value" : "/Users/apple/SDLShooter/SDLShooter/build"
 		},
 		{
 			"name" : "SDLShooter_IS_TOP_LEVEL",
@@ -3315,7 +4323,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/hoooooo/Documents/C++/SDLShooter"
+			"value" : "/Users/apple/SDLShooter/SDLShooter"
 		},
 		{
 			"name" : "TIFF_INCLUDE_DIR",
@@ -3399,7 +4407,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/opt/homebrew/include"
+			"value" : "/opt/homebrew/Cellar/libvorbis/1.3.7/include"
 		},
 		{
 			"name" : "Vorbis_vorbisfile_LIBRARY",
@@ -3411,7 +4419,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/lib/libvorbisfile.dylib"
+			"value" : "/opt/homebrew/Cellar/libvorbis/1.3.7/lib/libvorbisfile.dylib"
 		},
 		{
 			"name" : "Vorbis_vorbisfile_LINK_DIRECTORIES",
@@ -3423,7 +4431,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/libvorbis/1.3.7/lib"
 		},
 		{
 			"name" : "Vorbis_vorbisfile_LINK_LIBRARIES",
@@ -3496,6 +4504,78 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libz.tbd"
+		},
+		{
+			"name" : "__pkg_config_arguments_PC_FLAC",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "QUIET;flac"
+		},
+		{
+			"name" : "__pkg_config_arguments_PC_FLUIDSYNTH",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "QUIET;fluidsynth"
+		},
+		{
+			"name" : "__pkg_config_arguments_PC_MPG123",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "QUIET;libmpg123"
+		},
+		{
+			"name" : "__pkg_config_arguments_PC_OPUSFILE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "QUIET;opusfile"
+		},
+		{
+			"name" : "__pkg_config_arguments_PC_VORBIS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "QUIET;vorbisfile"
+		},
+		{
+			"name" : "__pkg_config_arguments_PC_XMP",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "QUIET;libxmp"
 		},
 		{
 			"name" : "__pkg_config_checked_PC_FLAC",
@@ -3663,7 +4743,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/opt/homebrew/include"
+			"value" : "/opt/homebrew/Cellar/libxmp/4.6.3/include"
 		},
 		{
 			"name" : "libxmp_LIBRARY",
@@ -3675,7 +4755,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/lib/libxmp.dylib"
+			"value" : "/opt/homebrew/Cellar/libxmp/4.6.3/lib/libxmp.dylib"
 		},
 		{
 			"name" : "libxmp_LINK_DIRECTORIES",
@@ -3687,7 +4767,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/libxmp/4.6.3/lib"
 		},
 		{
 			"name" : "libxmp_LINK_LIBRARIES",
@@ -3735,7 +4815,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/opt/homebrew/include"
+			"value" : "/opt/homebrew/Cellar/mpg123/1.32.10/include"
 		},
 		{
 			"name" : "mpg123_LIBRARY",
@@ -3747,7 +4827,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/lib/libmpg123.dylib"
+			"value" : "/opt/homebrew/Cellar/mpg123/1.32.10/lib/libmpg123.dylib"
 		},
 		{
 			"name" : "mpg123_LINK_DIRECTORIES",
@@ -3759,7 +4839,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : ""
+			"value" : "/opt/homebrew/Cellar/mpg123/1.32.10/lib"
 		},
 		{
 			"name" : "mpg123_LINK_LIBRARIES",
@@ -3784,6 +4864,114 @@
 			],
 			"type" : "STRING",
 			"value" : ""
+		},
+		{
+			"name" : "pkgcfg_lib_PC_FLAC_FLAC",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/opt/homebrew/Cellar/flac/1.5.0/lib/libFLAC.dylib"
+		},
+		{
+			"name" : "pkgcfg_lib_PC_FLUIDSYNTH_fluidsynth",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/opt/homebrew/Cellar/fluid-synth/2.4.6/lib/libfluidsynth.dylib"
+		},
+		{
+			"name" : "pkgcfg_lib_PC_MPG123_mpg123",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/opt/homebrew/Cellar/mpg123/1.32.10/lib/libmpg123.dylib"
+		},
+		{
+			"name" : "pkgcfg_lib_PC_OPUSFILE_opusfile",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1/lib/libopusfile.dylib"
+		},
+		{
+			"name" : "pkgcfg_lib_PC_VORBIS_vorbisfile",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/opt/homebrew/Cellar/libvorbis/1.3.7/lib/libvorbisfile.dylib"
+		},
+		{
+			"name" : "pkgcfg_lib_PC_XMP_xmp",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/opt/homebrew/Cellar/libxmp/4.6.3/lib/libxmp.dylib"
+		},
+		{
+			"name" : "prefix_result",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/opusfile/0.12_1/lib"
 		},
 		{
 			"name" : "wavpack_COMPILE_OPTIONS",

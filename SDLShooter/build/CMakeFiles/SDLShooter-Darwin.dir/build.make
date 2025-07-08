@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/hoooooo/Documents/C++/SDLShooter
+CMAKE_SOURCE_DIR = /Users/apple/SDLShooter/SDLShooter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/hoooooo/Documents/C++/SDLShooter/build
+CMAKE_BINARY_DIR = /Users/apple/SDLShooter/SDLShooter/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SDLShooter-Darwin.dir/depend.make
@@ -73,46 +73,46 @@ CMakeFiles/SDLShooter-Darwin.dir/codegen:
 .PHONY : CMakeFiles/SDLShooter-Darwin.dir/codegen
 
 CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: CMakeFiles/SDLShooter-Darwin.dir/flags.make
-CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: /Users/hoooooo/Documents/C++/SDLShooter/src/main.cpp
+CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: /Users/apple/SDLShooter/SDLShooter/src/main.cpp
 CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: CMakeFiles/SDLShooter-Darwin.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hoooooo/Documents/C++/SDLShooter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o -MF CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o.d -o CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o -c /Users/hoooooo/Documents/C++/SDLShooter/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/apple/SDLShooter/SDLShooter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o -MF CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o.d -o CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o -c /Users/apple/SDLShooter/SDLShooter/src/main.cpp
 
 CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hoooooo/Documents/C++/SDLShooter/src/main.cpp > CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/apple/SDLShooter/SDLShooter/src/main.cpp > CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.i
 
 CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hoooooo/Documents/C++/SDLShooter/src/main.cpp -o CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/apple/SDLShooter/SDLShooter/src/main.cpp -o CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.s
 
 CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o: CMakeFiles/SDLShooter-Darwin.dir/flags.make
-CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o: /Users/hoooooo/Documents/C++/SDLShooter/src/Game.cpp
+CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o: /Users/apple/SDLShooter/SDLShooter/src/Game.cpp
 CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o: CMakeFiles/SDLShooter-Darwin.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hoooooo/Documents/C++/SDLShooter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o -MF CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o.d -o CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o -c /Users/hoooooo/Documents/C++/SDLShooter/src/Game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/apple/SDLShooter/SDLShooter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o -MF CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o.d -o CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o -c /Users/apple/SDLShooter/SDLShooter/src/Game.cpp
 
 CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hoooooo/Documents/C++/SDLShooter/src/Game.cpp > CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/apple/SDLShooter/SDLShooter/src/Game.cpp > CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.i
 
 CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hoooooo/Documents/C++/SDLShooter/src/Game.cpp -o CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/apple/SDLShooter/SDLShooter/src/Game.cpp -o CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.s
 
 CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o: CMakeFiles/SDLShooter-Darwin.dir/flags.make
-CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o: /Users/hoooooo/Documents/C++/SDLShooter/src/SceneMain.cpp
+CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o: /Users/apple/SDLShooter/SDLShooter/src/SceneMain.cpp
 CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o: CMakeFiles/SDLShooter-Darwin.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hoooooo/Documents/C++/SDLShooter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o -MF CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o.d -o CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o -c /Users/hoooooo/Documents/C++/SDLShooter/src/SceneMain.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/apple/SDLShooter/SDLShooter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o -MF CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o.d -o CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o -c /Users/apple/SDLShooter/SDLShooter/src/SceneMain.cpp
 
 CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hoooooo/Documents/C++/SDLShooter/src/SceneMain.cpp > CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/apple/SDLShooter/SDLShooter/src/SceneMain.cpp > CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.i
 
 CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hoooooo/Documents/C++/SDLShooter/src/SceneMain.cpp -o CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/apple/SDLShooter/SDLShooter/src/SceneMain.cpp -o CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.s
 
 # Object files for target SDLShooter-Darwin
 SDLShooter__Darwin_OBJECTS = \
@@ -123,20 +123,20 @@ SDLShooter__Darwin_OBJECTS = \
 # External object files for target SDLShooter-Darwin
 SDLShooter__Darwin_EXTERNAL_OBJECTS =
 
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin: CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin: CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin: CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin: CMakeFiles/SDLShooter-Darwin.dir/build.make
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin: /opt/homebrew/Cellar/sdl2/2.32.6/lib/libSDL2.dylib
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin: /opt/homebrew/Cellar/sdl2_image/2.8.8/lib/libSDL2_image.dylib
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin: /opt/homebrew/Cellar/sdl2_mixer/2.8.1_1/lib/libSDL2_mixer.dylib
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin: /opt/homebrew/Cellar/sdl2_ttf/2.24.0/lib/libSDL2_ttf.dylib
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin: CMakeFiles/SDLShooter-Darwin.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/hoooooo/Documents/C++/SDLShooter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable /Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin"
+/Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin: CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o
+/Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin: CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o
+/Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin: CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o
+/Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin: CMakeFiles/SDLShooter-Darwin.dir/build.make
+/Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin: /opt/homebrew/Cellar/sdl2/2.32.6/lib/libSDL2.dylib
+/Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin: /opt/homebrew/Cellar/sdl2_image/2.8.8/lib/libSDL2_image.dylib
+/Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin: /opt/homebrew/Cellar/sdl2_mixer/2.8.1_1/lib/libSDL2_mixer.dylib
+/Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin: /opt/homebrew/Cellar/sdl2_ttf/2.24.0/lib/libSDL2_ttf.dylib
+/Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin: CMakeFiles/SDLShooter-Darwin.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/apple/SDLShooter/SDLShooter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable /Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SDLShooter-Darwin.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/SDLShooter-Darwin.dir/build: /Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin
+CMakeFiles/SDLShooter-Darwin.dir/build: /Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin
 .PHONY : CMakeFiles/SDLShooter-Darwin.dir/build
 
 CMakeFiles/SDLShooter-Darwin.dir/clean:
@@ -144,6 +144,6 @@ CMakeFiles/SDLShooter-Darwin.dir/clean:
 .PHONY : CMakeFiles/SDLShooter-Darwin.dir/clean
 
 CMakeFiles/SDLShooter-Darwin.dir/depend:
-	cd /Users/hoooooo/Documents/C++/SDLShooter/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/hoooooo/Documents/C++/SDLShooter /Users/hoooooo/Documents/C++/SDLShooter /Users/hoooooo/Documents/C++/SDLShooter/build /Users/hoooooo/Documents/C++/SDLShooter/build /Users/hoooooo/Documents/C++/SDLShooter/build/CMakeFiles/SDLShooter-Darwin.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/apple/SDLShooter/SDLShooter/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/apple/SDLShooter/SDLShooter /Users/apple/SDLShooter/SDLShooter /Users/apple/SDLShooter/SDLShooter/build /Users/apple/SDLShooter/SDLShooter/build /Users/apple/SDLShooter/SDLShooter/build/CMakeFiles/SDLShooter-Darwin.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/SDLShooter-Darwin.dir/depend
 

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin"
-  "/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter-Darwin.pdb"
+  "/Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin"
+  "/Users/apple/SDLShooter/SDLShooter/SDLShooter-Darwin.pdb"
   "CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o"
   "CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o.d"
   "CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o"
