@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "SceneMain.h"
 #include <SDL.h>
+#include <SDL_image.h>
 Game::Game()
 {
 }
@@ -55,7 +56,15 @@ void Game::init()
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL could not create renderer! SDL_Error: %s\n", SDL_GetError());
         isRunning = false; // 创建渲染器失败，设置游戏运行状态为false
     }
+    // 初始化SDL_image
+    if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL_image could not initialize! IMG_Error: %s\n", IMG_GetError());
+        isRunning = false; // 初始化SDL_image失败，设置游戏运行状态为false
+    }
+
     currentScene = new SceneMain(); // 创建一个新的场景对象
+    currentScene->init();           // 初始化当前场景
 }
 
 // 清理游戏
@@ -66,6 +75,8 @@ void Game::clean()
         currentScene->clean(); // 清理当前场景
         delete currentScene;   // 删除当前场景对象
     }
+    // 清理SDL_image
+    IMG_Quit();
     // 清理游戏资源
     SDL_DestroyRenderer(renderer); // 销毁渲染器
     SDL_DestroyWindow(window);     // 销毁窗口

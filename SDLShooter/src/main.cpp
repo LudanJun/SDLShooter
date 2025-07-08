@@ -5,9 +5,9 @@
 #include <SDL_ttf.h>
 #include "Game.h"
 int main(int, char **)
-{
-
-    Game game;   // 创建游戏对象
+{ // 创建游戏对象
+    // 单例模式获取游戏实例
+    Game &game = Game::getInstance();
     game.init(); // 初始化游戏
     game.run();  // 运行游戏
 

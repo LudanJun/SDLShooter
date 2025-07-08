@@ -387,7 +387,8 @@ CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o: /Users/apple/SDLShooter/SDLShoo
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_version.h \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_video.h \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/begin_code.h \
-  /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/close_code.h
+  /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/close_code.h \
+  /opt/homebrew/Cellar/sdl2_image/2.8.8/include/SDL2/SDL_image.h
 
 CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o: /Users/apple/SDLShooter/SDLShooter/src/SceneMain.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h \
@@ -722,6 +723,7 @@ CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o: /Users/apple/SDLShooter/SD
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdarg.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stddef.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdint.h \
+  /Users/apple/SDLShooter/SDLShooter/src/Game.h \
   /Users/apple/SDLShooter/SDLShooter/src/Object.h \
   /Users/apple/SDLShooter/SDLShooter/src/Scene.h \
   /Users/apple/SDLShooter/SDLShooter/src/SceneMain.h \
@@ -774,7 +776,8 @@ CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o: /Users/apple/SDLShooter/SD
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_version.h \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_video.h \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/begin_code.h \
-  /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/close_code.h
+  /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/close_code.h \
+  /opt/homebrew/Cellar/sdl2_image/2.8.8/include/SDL2/SDL_image.h
 
 CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: /Users/apple/SDLShooter/SDLShooter/src/main.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h \
@@ -1807,8 +1810,6 @@ CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: /Users/apple/SDLShooter/SDLShoo
 
 /opt/homebrew/Cellar/sdl2_mixer/2.8.1_1/include/SDL2/SDL_mixer.h:
 
-/opt/homebrew/Cellar/sdl2_image/2.8.8/include/SDL2/SDL_image.h:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/_wchar.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/_inttypes.h:
@@ -2060,6 +2061,8 @@ CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: /Users/apple/SDLShooter/SDLShoo
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/incrementable_traits.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/front_insert_iterator.h:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/distance.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_integral.h:
 
@@ -2365,9 +2368,9 @@ CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: /Users/apple/SDLShooter/SDLShoo
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/write_escaped.h:
 
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__compare/weak_order.h:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/sort_heap.h:
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__compare/weak_order.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/shift_left.h:
 
@@ -2743,8 +2746,6 @@ CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: /Users/apple/SDLShooter/SDLShoo
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/in_in_result.h:
 
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/distance.h:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/in_out_out_result.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_sigaltstack.h:
@@ -2868,6 +2869,8 @@ CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: /Users/apple/SDLShooter/SDLShoo
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/indirectly_comparable.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/__xlocale.h:
+
+/opt/homebrew/Cellar/sdl2_image/2.8.8/include/SDL2/SDL_image.h:
 
 /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/close_code.h:
 

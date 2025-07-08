@@ -24,9 +24,10 @@ class Game
     // 公共接口
 public:
     // 单例模式，获取游戏实例 推荐引用 Game &getInstance()
-    static Game &getInstance(){
+    static Game &getInstance()
+    {
         static Game instance; // 静态实例
-        return instance; // 返回实例引用
+        return instance;      // 返回实例引用
     };
     // 析构函数
     ~Game();
@@ -45,13 +46,20 @@ public:
     void update();
     // 渲染游戏画面
     void render();
+    // 获取渲染器
+    SDL_Renderer *getRenderer() { return renderer; };
+    // 获取窗口
+    SDL_Window *getWindow() { return window; };
+     
+    int getWindowWidth() const { return windowWidth; }  // 获取窗口宽度
+    int getWindowHeight() const { return windowHeight; } // 获取窗口高度
 
 private:
     // 构造函数
     Game();
-    //删除拷贝与构造函数
-    Game(const Game&) = delete ; // 禁止拷贝构造函数
-    Game& operator=(const Game&) = delete; // 禁止赋值构造函数
+    // 删除拷贝与构造函数
+    Game(const Game &) = delete;            // 禁止拷贝构造函数
+    Game &operator=(const Game &) = delete; // 禁止赋值构造函数
     // 私有成员
     bool isRunning = true;            // 游戏是否运行
     Scene *currentScene = nullptr;    // 保存当前游戏场景  在 run函数中切换

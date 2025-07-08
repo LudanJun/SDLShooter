@@ -389,6 +389,7 @@ CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o
  /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_video.h
  /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/begin_code.h
  /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/close_code.h
+ /opt/homebrew/Cellar/sdl2_image/2.8.8/include/SDL2/SDL_image.h
 
 CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o
  /Users/apple/SDLShooter/SDLShooter/src/SceneMain.cpp
@@ -724,6 +725,7 @@ CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o
  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdarg.h
  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stddef.h
  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdint.h
+ /Users/apple/SDLShooter/SDLShooter/src/Game.h
  /Users/apple/SDLShooter/SDLShooter/src/Object.h
  /Users/apple/SDLShooter/SDLShooter/src/Scene.h
  /Users/apple/SDLShooter/SDLShooter/src/SceneMain.h
@@ -777,6 +779,7 @@ CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o
  /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_video.h
  /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/begin_code.h
  /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/close_code.h
+ /opt/homebrew/Cellar/sdl2_image/2.8.8/include/SDL2/SDL_image.h
 
 CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o
  /Users/apple/SDLShooter/SDLShooter/src/main.cpp

@@ -384,4 +384,6 @@ CMakeFiles/SDLShooter-Darwin.dir/src/SceneMain.cpp.o: \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_version.h \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_locale.h \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_misc.h \
-  /Users/apple/SDLShooter/SDLShooter/src/Object.h
+  /Users/apple/SDLShooter/SDLShooter/src/Object.h \
+  /Users/apple/SDLShooter/SDLShooter/src/Game.h \
+  /opt/homebrew/Cellar/sdl2_image/2.8.8/include/SDL2/SDL_image.h

@@ -8,6 +8,9 @@
 // 在这里引用是不想再CMake中添加Object.h的路径了一般只添加.cpp
 #include "Object.h"
 // 定义一个名为ScreneMain的类，继承自Scene类
+
+class Game; // 前向声明Game类
+
 class SceneMain : public Scene
 {
 public:
@@ -28,8 +31,10 @@ public:
     void clean() override;
 
 private:
+    // 需要先在上面声明class Game;
+    Game &game; // 游戏对象引用
     // 主场景里的初始化物体
-    Player *player; // 玩具飞机对象
+    Player player; // 玩具飞机对象 
 };
 
 #endif // SCENE_MAIN_H
