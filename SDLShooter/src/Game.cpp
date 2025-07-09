@@ -18,18 +18,31 @@ void Game::run()
 {
     while (isRunning)
     {
+        auto frameStart = SDL_GetTicks();// 获取开始时间
         SDL_Event event;
         handleEvent(&event);
 
-        update(); // 更新游戏状态
+        update(deltaTime); // 更新游戏状态
 
         render(); // 渲染游戏画面
+        auto frameEnd = SDL_GetTicks(); // 获取结束时间
+        auto diff = frameEnd - frameStart;
+        if (diff < frameTime)//如果时间差小于帧时间
+        {
+            //需要等待延时
+            SDL_Delay(frameTime - diff); // 延迟
+            deltaTime = frameTime / 1000.0f;// 毫秒转秒
+        }else{
+            deltaTime = diff / 1000.0f;// 毫秒转秒
+        }//稳定帧率
+        
     }
 }
 
 // 初始化游戏
 void Game::init()
 {
+    frameTime = 1000 / FPS;//1秒是1000毫秒 / 60帧 = 16.666666666666668毫秒
     // TODO: 在这里添加初始化游戏的代码
     // SDL 初始化
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
@@ -111,9 +124,9 @@ void Game::handleEvent(SDL_Event *event)
     }
 }
 
-void Game::update()
+void Game::update(float deltaTime)
 {
-    currentScene->update(); //   更新当前场景
+    currentScene->update(deltaTime); //   更新当前场景
 }
 
 void Game::render()

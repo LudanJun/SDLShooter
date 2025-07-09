@@ -15,6 +15,7 @@ struct Player
     ///< 游戏对象的尺寸 玩具飞机的尺寸 初始化为0, 0尺寸
     int width = 0;
     int height = 0;
+    int speed = 200;// 玩具飞机的速度 初始化为0
 };
 
 #endif // OBJECT_H

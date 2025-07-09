@@ -43,7 +43,7 @@ public:
     // 处理事件
     void handleEvent(SDL_Event *event);
     // 更新游戏状态
-    void update();
+    void update(float deltaTime);
     // 渲染游戏画面
     void render();
     // 获取渲染器
@@ -68,6 +68,9 @@ private:
     // 窗口大小以后也可能用到 把保存成成员变量
     int windowWidth = 600;  // 窗口宽度
     int windowHeight = 800; // 窗口高度
+    int FPS = 60;            // 帧率
+    Uint32 frameTime;       // 帧开始时间
+    float deltaTime;         // 帧间隔时间
 };
 
 #endif

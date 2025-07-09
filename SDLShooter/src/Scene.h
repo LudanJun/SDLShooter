@@ -26,7 +26,7 @@ class Scene{
         // virtual:代表虚函数，子类可以重写  =0 :代表纯虚函数，子类必须实现
         virtual void init() = 0;   
 
-        virtual void update() = 0;
+        virtual void update(float deltaTime) = 0;
   
         virtual void render() = 0;
 

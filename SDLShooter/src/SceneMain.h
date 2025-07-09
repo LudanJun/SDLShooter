@@ -22,7 +22,7 @@ public:
     // 场景初始化函数
     void init() override;
     // 场景更新函数
-    void update() override;
+    void update(float deltaTime) override;
     // 场景渲染函数
     void render() override;
     //
@@ -30,7 +30,7 @@ public:
     // 场景清理函数
     void clean() override;
 
-    void keyboardControl(); // 键盘控制函数
+    void keyboardControl(float deltaTime); // 键盘控制函数
 
 private:
     // 需要先在上面声明class Game;
