@@ -1,3 +1,0 @@
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter/build/CMakeFiles/SDLShooter-Darwin.dir
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter/build/CMakeFiles/edit_cache.dir
-/Users/hoooooo/Documents/C++/SDLShooter/SDLShooter/build/CMakeFiles/rebuild_cache.dir
