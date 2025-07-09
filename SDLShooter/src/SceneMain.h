@@ -30,6 +30,8 @@ public:
     // 场景清理函数
     void clean() override;
 
+    void keyboardControl(); // 键盘控制函数
+
 private:
     // 需要先在上面声明class Game;
     Game &game; // 游戏对象引用

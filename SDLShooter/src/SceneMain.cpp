@@ -19,6 +19,8 @@ void SceneMain::update()
     // TODO: 在这里添加更新逻辑
 
     // 更新场景中的物体、角色等
+
+    keyboardControl();
 }
 // 1.初始化函数
 void SceneMain::init()
@@ -73,3 +75,37 @@ void SceneMain::clean()
 
     // 清空屏幕的具体实现
 }
+
+// SceneMain类中的keyboardControl函数，用于处理键盘控制
+void SceneMain::keyboardControl()
+{
+    // TODO: 实现键盘控制逻辑
+    // 返回Uint8 类型的指针，指向一个数组，该数组包含当前所有按键的状态，如果某个按键被按下，则对应的数组元素为1，否则为0
+    // 使用auto 关键字，让编译器自动推导出变量的类型
+  auto keyboardState = SDL_GetKeyboardState(NULL); // 获取键盘状态
+    if (keyboardState[SDL_SCANCODE_W]){
+        player.position.y -= 0.5; // 向上移动
+    }
+    if (keyboardState[SDL_SCANCODE_S]){
+        player.position.y += 0.5;
+    }
+    if (keyboardState[SDL_SCANCODE_A]){
+        player.position.x -= 0.5;
+    }
+    if (keyboardState[SDL_SCANCODE_D]){
+        player.position.x += 0.5;
+    }
+    //限制飞机的移动范围
+    if (player.position.x < 0) player.position.x = 0;
+    //飞机移动到最右边
+    if (player.position.x > game.getWindowWidth() - player.width)
+    {
+        player.position.x = game.getWindowWidth() - player.width;
+    }
+    if (player.position.y < 0) player.position.y = 0;
+    //飞机移动到最左边
+    if (player.position.y > game.getWindowHeight() - player.height){
+        player.position.y = game.getWindowHeight() - player.height;
+    }
+ }
+ 

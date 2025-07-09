@@ -1,7 +1,7 @@
 CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o: \
-  /Users/apple/SDLShooter/SDLShooter/src/Game.cpp \
-  /Users/apple/SDLShooter/SDLShooter/src/Game.h \
-  /Users/apple/SDLShooter/SDLShooter/src/Scene.h \
+  /Users/hoooooo/Documents/C++/SDLShooter/SDLShooter/src/Game.cpp \
+  /Users/hoooooo/Documents/C++/SDLShooter/SDLShooter/src/Game.h \
+  /Users/hoooooo/Documents/C++/SDLShooter/SDLShooter/src/Scene.h \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL.h \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_main.h \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_stdinc.h \
@@ -384,6 +384,6 @@ CMakeFiles/SDLShooter-Darwin.dir/src/Game.cpp.o: \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_version.h \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_locale.h \
   /opt/homebrew/Cellar/sdl2/2.32.6/include/SDL2/SDL_misc.h \
-  /Users/apple/SDLShooter/SDLShooter/src/SceneMain.h \
-  /Users/apple/SDLShooter/SDLShooter/src/Object.h \
+  /Users/hoooooo/Documents/C++/SDLShooter/SDLShooter/src/SceneMain.h \
+  /Users/hoooooo/Documents/C++/SDLShooter/SDLShooter/src/Object.h \
   /opt/homebrew/Cellar/sdl2_image/2.8.8/include/SDL2/SDL_image.h

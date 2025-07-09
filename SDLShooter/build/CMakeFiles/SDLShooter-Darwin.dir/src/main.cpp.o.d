@@ -1,5 +1,5 @@
 CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: \
-  /Users/apple/SDLShooter/SDLShooter/src/main.cpp \
+  /Users/hoooooo/Documents/C++/SDLShooter/SDLShooter/src/main.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__assert \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__assertion_handler \
@@ -1022,5 +1022,5 @@ CMakeFiles/SDLShooter-Darwin.dir/src/main.cpp.o: \
   /opt/homebrew/Cellar/sdl2_image/2.8.8/include/SDL2/SDL_image.h \
   /opt/homebrew/Cellar/sdl2_mixer/2.8.1_1/include/SDL2/SDL_mixer.h \
   /opt/homebrew/Cellar/sdl2_ttf/2.24.0/include/SDL2/SDL_ttf.h \
-  /Users/apple/SDLShooter/SDLShooter/src/Game.h \
-  /Users/apple/SDLShooter/SDLShooter/src/Scene.h
+  /Users/hoooooo/Documents/C++/SDLShooter/SDLShooter/src/Game.h \
+  /Users/hoooooo/Documents/C++/SDLShooter/SDLShooter/src/Scene.h
