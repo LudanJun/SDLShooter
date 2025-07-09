@@ -7,10 +7,9 @@
 #include "Scene.h"
 // 在这里引用是不想再CMake中添加Object.h的路径了一般只添加.cpp
 #include "Object.h"
+#include <list> // 引入 list容器
+class Game;     // 前向声明Game类
 // 定义一个名为ScreneMain的类，继承自Scene类
-
-class Game; // 前向声明Game类
-
 class SceneMain : public Scene
 {
 public:
@@ -21,26 +20,56 @@ public:
 
     // 场景初始化函数
     void init() override;
+
     // 场景更新函数
     void update(float deltaTime) override;
+
     // 场景渲染函数
     void render() override;
     //
     void handleEvent(SDL_Event *event) override;
+
     // 场景清理函数
     void clean() override;
 
-    void keyboardControl(float deltaTime); // 键盘控制函数
+    // 键盘控制函数
+    void keyboardControl(float deltaTime);
 
     // 玩家飞机射击函数
     // 这里的shootPlayer函数是用来处理玩家飞机的射击逻辑
     void shootPlayer();
 
+    /// 更新玩家子弹
+    void updatePlayerProjectiles(float deltaTime);
+
+    /// 渲染玩家子弹
+    void renderPlayerProjectiles();
+
 private:
     // 需要先在上面声明class Game;
-    Game &game; // 游戏对象引用
+    // 游戏对象引用
+    Game &game;
+
     // 主场景里的初始化物体
-    Player player; // 玩具飞机对象 
+    // 玩具飞机对象
+    Player player;
+
+    // 子弹模板对象 提前初始化好
+    // 这里的projectilePlayerTemplate是一个子弹模板对象，用于创建子弹实例
+    // 通过提前初始化好子弹模板对象，可以在游戏中快速创建子弹实例
+    // 这样可以避免每次射击都重新加载纹理，提高性能
+    // 这里的子弹模板对象是一个结构体，包含了子弹的纹理、位置、尺寸和速度等属性
+    ProjectilePlayer projectilePlayerTemplate;
+
+    // 子弹列表
+    // 这里的projectilesPlayer是一个子弹列表，用于存储玩家飞机射出的子弹实例
+    // 通过使用列表容器，可以方便地管理和遍历子弹实例
+    // 这样可以实现子弹的创建、更新和渲染等功能
+    // 每当玩家飞机射击时，会创建一个新的子弹实例
+    // 并将其添加到子弹列表中
+    // 在游戏更新和渲染过程中，可以遍历子弹列表，对每个子弹实例进行更新和渲染操作
+    // 这样可以实现子弹的动态管理和渲染效果
+    std::list<ProjectilePlayer *> projectilesPlayer; // 子弹类型
 };
 
 #endif // SCENE_MAIN_H

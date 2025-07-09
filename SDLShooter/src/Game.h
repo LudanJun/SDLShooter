@@ -50,17 +50,18 @@ public:
     SDL_Renderer *getRenderer() { return renderer; };
     // 获取窗口
     SDL_Window *getWindow() { return window; };
-     
-    int getWindowWidth() const { return windowWidth; }  // 获取窗口宽度
-    int getWindowHeight() const { return windowHeight; } // 获取窗口高度
+    // 获取窗口宽度
+    int getWindowWidth() const { return windowWidth; }
+    // 获取窗口高度
+    int getWindowHeight() const { return windowHeight; }
 
-private:
+private: // 私有成员
     // 构造函数
     Game();
     // 删除拷贝与构造函数
     Game(const Game &) = delete;            // 禁止拷贝构造函数
     Game &operator=(const Game &) = delete; // 禁止赋值构造函数
-    // 私有成员
+
     bool isRunning = true;            // 游戏是否运行
     Scene *currentScene = nullptr;    // 保存当前游戏场景  在 run函数中切换
     SDL_Window *window = nullptr;     // 游戏窗口对象 后面常用
@@ -68,9 +69,9 @@ private:
     // 窗口大小以后也可能用到 把保存成成员变量
     int windowWidth = 600;  // 窗口宽度
     int windowHeight = 800; // 窗口高度
-    int FPS = 60;            // 帧率
+    int FPS = 60;           // 帧率
     Uint32 frameTime;       // 帧开始时间
-    float deltaTime;         // 帧间隔时间
+    float deltaTime;        // 帧间隔时间
 };
 
 #endif

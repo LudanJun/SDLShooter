@@ -1,4 +1,4 @@
-//场景基类
+// 场景基类
 #ifndef SCENE_H
 #define SCENE_H
 
@@ -16,23 +16,24 @@
 /// 使得子类可以根据具体需求实现不同的场景逻辑
 /// 这种设计模式在游戏开发中非常常见，可以提高代码的可读性
 /// 和可扩展性
-class Scene{
-    public:
-        // 构造函数，默认初始化
-        Scene() = default;
-        // 虚析构函数，用于删除Scene对象
-        virtual ~Scene() = default;
+class Scene
+{
+public:
+    // 构造函数，默认初始化
+    Scene() = default;
+    // 虚析构函数，用于删除Scene对象
+    virtual ~Scene() = default;
 
-        // virtual:代表虚函数，子类可以重写  =0 :代表纯虚函数，子类必须实现
-        virtual void init() = 0;   
+    // virtual:代表虚函数，子类可以重写  =0 :代表纯虚函数，子类必须实现
+    virtual void init() = 0;
 
-        virtual void update(float deltaTime) = 0;
-  
-        virtual void render() = 0;
+    virtual void update(float deltaTime) = 0;
 
-        virtual void clean() = 0;
+    virtual void render() = 0;
 
-        virtual void handleEvent(SDL_Event* event) = 0;
+    virtual void clean() = 0;
+
+    virtual void handleEvent(SDL_Event *event) = 0;
 };
 
 #endif

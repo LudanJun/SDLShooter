@@ -14,14 +14,7 @@ SceneMain ::SceneMain() : game(Game::getInstance())
 SceneMain ::~SceneMain()
 {
 }
-void SceneMain::update(float deltaTime)
-{
-    // TODO: 在这里添加更新逻辑
 
-    // 更新场景中的物体、角色等
-
-    keyboardControl(deltaTime);
-}
 // 1.初始化函数
 void SceneMain::init()
 {
@@ -42,12 +35,31 @@ void SceneMain::init()
     player.height = player.height / 4;                                // 玩具飞机的高度除以6
     player.position.x = game.getWindowWidth() / 2 - player.width / 2; // 居中显示
     player.position.y = game.getWindowHeight() - player.height - 20;  // 底
+
+    // 初始化模版
+    projectilePlayerTemplate.texture = IMG_LoadTexture(game.getRenderer(), "assets/image/laser-1.png");
+    // 获取子弹图片的宽和高
+    SDL_QueryTexture(projectilePlayerTemplate.texture, nullptr, nullptr, &projectilePlayerTemplate.width, &projectilePlayerTemplate.height);
+    projectilePlayerTemplate.width /= 4;  // 子弹宽度
+    projectilePlayerTemplate.height /= 4; // 子弹高度
 }
+void SceneMain::update(float deltaTime)
+{
+    // TODO: 在这里添加更新逻辑
+
+    // 更新场景中的物体、角色等
+
+    keyboardControl(deltaTime);
+
+    updatePlayerProjectiles(deltaTime); // 更新玩家发射的子弹
+}
+
 // 2.渲染函数
 void SceneMain::render()
 {
     // TODO: 添加渲染代码
-    // 玩家飞机的矩形
+    renderPlayerProjectiles(); // 渲染玩家发射的子弹
+    // 渲染玩家飞机
     SDL_Rect playerRect = {
         static_cast<int>(player.position.x),
         static_cast<int>(player.position.y),
@@ -68,12 +80,25 @@ void SceneMain::handleEvent(SDL_Event *event)
 // 清空屏幕
 void SceneMain::clean()
 {
+    // 清理容器
+    for (auto &projectile : projectilesPlayer)
+    {
+        if (projectile != nullptr) // 检查子弹实例是否为空
+        {
+            delete projectile; // 删除子弹实例
+        }
+    }
+    projectilesPlayer.clear(); // 清空子弹列表
+
+    // 清理模版
     if (player.texture != nullptr)
     {
         SDL_DestroyTexture(player.texture); // 销毁玩家飞机纹理
     }
-
-    // 清空屏幕的具体实现
+    if (projectilePlayerTemplate.texture != nullptr)
+    {
+        SDL_DestroyTexture(projectilePlayerTemplate.texture); // 销毁子弹纹理
+    }
 }
 
 // SceneMain类中的keyboardControl函数，用于处理键盘控制
@@ -82,44 +107,119 @@ void SceneMain::keyboardControl(float deltaTime)
     // TODO: 实现键盘控制逻辑
     // 返回Uint8 类型的指针，指向一个数组，该数组包含当前所有按键的状态，如果某个按键被按下，则对应的数组元素为1，否则为0
     // 使用auto 关键字，让编译器自动推导出变量的类型
-  auto keyboardState = SDL_GetKeyboardState(NULL); // 获取键盘状态
-    if (keyboardState[SDL_SCANCODE_W]){
-        player.position.y -= deltaTime* player.speed; // 向上移动
+    auto keyboardState = SDL_GetKeyboardState(NULL); // 获取键盘状态
+    if (keyboardState[SDL_SCANCODE_W])
+    {
+        player.position.y -= deltaTime * player.speed; // 向上移动
     }
-    if (keyboardState[SDL_SCANCODE_S]){
+    if (keyboardState[SDL_SCANCODE_S])
+    {
         player.position.y += deltaTime * player.speed;
     }
-    if (keyboardState[SDL_SCANCODE_A]){
-        player.position.x -= deltaTime* player.speed;
+    if (keyboardState[SDL_SCANCODE_A])
+    {
+        player.position.x -= deltaTime * player.speed;
     }
-    if (keyboardState[SDL_SCANCODE_D]){
-        player.position.x += deltaTime* player.speed;
+    if (keyboardState[SDL_SCANCODE_D])
+    {
+        player.position.x += deltaTime * player.speed;
     }
-    //限制飞机的移动范围
-    if (player.position.x < 0) player.position.x = 0;
-    //飞机移动到最右边
+    // 限制飞机的移动范围
+    if (player.position.x < 0)
+        player.position.x = 0;
+    // 飞机移动到最右边
     if (player.position.x > game.getWindowWidth() - player.width)
     {
         player.position.x = game.getWindowWidth() - player.width;
     }
-    if (player.position.y < 0) player.position.y = 0;
-    //飞机移动到最左边
-    if (player.position.y > game.getWindowHeight() - player.height){
+    if (player.position.y < 0)
+        player.position.y = 0;
+    // 飞机移动到最左边
+    if (player.position.y > game.getWindowHeight() - player.height)
+    {
         player.position.y = game.getWindowHeight() - player.height;
     }
 
     /// 控制子弹发射
-    if (keyboardState[SDL_SCANCODE_J]){
+    if (keyboardState[SDL_SCANCODE_J])
+    {
         auto currentTime = SDL_GetTicks(); // 获取当前时间戳
         /// 当前时间 - 玩家上次射击时间 >= 冷却时间
-        if (currentTime - player.lastShotTime >= player.coolDown) // 检查冷却时间
+        if (currentTime - player.lastShotTime > player.coolDown) // 检查冷却时间
         {
-            shootPlayer(); // 调用射击函数
+            shootPlayer();                     // 调用射击函数
             player.lastShotTime = currentTime; // 更新上次射击时间
         }
     }
- }
+}
 
- void SceneMain::shootPlayer()
- {
- }
+void SceneMain::shootPlayer()
+{
+    // 在这里实现发射子弹的逻辑
+    auto projectile = new ProjectilePlayer(projectilePlayerTemplate); // 创建新的子弹实例
+
+    // 设置子弹的位置
+    projectile->position.x = player.position.x + player.width / 2 - projectile->width / 2; // 子弹位置居中
+    projectile->position.y = player.position.y;                                            // 子弹从玩家位置发射
+
+    // 将子弹添加到子弹列表中
+    // 这里的projectilesPlayer是一个std::list<ProjectilePlayer *>类型的
+    // 列表，用于存储玩家飞机射出的子弹实例
+    // 每当玩家飞机射击时，会创建一个新的子弹实例，并将其
+    // 添加到子弹列表中
+    // 在游戏更新和渲染过程中，可以遍历子弹列表，对每个
+    // 子弹实例进行更新和渲染操作
+    // 这样可以实现子弹的动态管理和渲染效果
+    // 使用列表容器可以方便地添加、删除和遍历子弹实例
+    // 这样可以提高代码的可读性和可维护性
+    // 同时也可以提高游戏性能，避免频繁的内存分配和释放操作
+    // 注意：在实际游戏中，可能还需要处理子弹的碰撞检测、生命周期等逻辑
+    projectilesPlayer.push_back(projectile);
+}
+
+// 更新玩家发射的子弹
+void SceneMain::updatePlayerProjectiles(float deltaTime)
+{
+    // TODO: 实现更新玩家发射的子弹的逻辑
+    // 从容器的起始点 开始遍历 终点是容器的结束点end
+    // it是个指针
+    int margin = 32; // 子弹超出屏幕范围时移除
+    for (auto it = projectilesPlayer.begin(); it != projectilesPlayer.end();)
+    {
+        auto projectile = *it; // 获取当前子弹实例
+        // 子弹朝上 -=
+        projectile->position.y -= projectile->speed * deltaTime; // 更新子弹位置
+
+        // 移动到下一个子弹实例
+        if (projectile->position.y + margin < 0) // 如果子弹超出屏幕上边界，则删除子弹实例
+        {
+            delete projectile;
+            // it所在的位置删除后会返回一个迭代器指针,指向下一个元素
+            it = projectilesPlayer.erase(it); // 从子弹列表中删除子弹实例
+            // 判断是否真的删除掉 打印
+            SDL_Log("Player projectile removed at position: (%.2f, %.2f)", projectile->position.x, projectile->position.y);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+}
+
+// 渲染玩家发射的子弹
+void SceneMain::renderPlayerProjectiles()
+{
+
+    for (auto projectile : projectilesPlayer)
+    {
+        // 计算子弹在屏幕上的位置
+        SDL_Rect projectileRect = {
+            static_cast<int>(projectile->position.x),
+            static_cast<int>(projectile->position.y),
+            projectile->width,
+            projectile->height,
+        };
+        // 渲染子弹
+        SDL_RenderCopy(game.getRenderer(), projectile->texture, nullptr, &projectileRect);
+    }
+}
