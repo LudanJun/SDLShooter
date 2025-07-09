@@ -32,6 +32,10 @@ public:
 
     void keyboardControl(float deltaTime); // 键盘控制函数
 
+    // 玩家飞机射击函数
+    // 这里的shootPlayer函数是用来处理玩家飞机的射击逻辑
+    void shootPlayer();
+
 private:
     // 需要先在上面声明class Game;
     Game &game; // 游戏对象引用

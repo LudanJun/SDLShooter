@@ -107,5 +107,19 @@ void SceneMain::keyboardControl(float deltaTime)
     if (player.position.y > game.getWindowHeight() - player.height){
         player.position.y = game.getWindowHeight() - player.height;
     }
+
+    /// 控制子弹发射
+    if (keyboardState[SDL_SCANCODE_J]){
+        auto currentTime = SDL_GetTicks(); // 获取当前时间戳
+        /// 当前时间 - 玩家上次射击时间 >= 冷却时间
+        if (currentTime - player.lastShotTime >= player.coolDown) // 检查冷却时间
+        {
+            shootPlayer(); // 调用射击函数
+            player.lastShotTime = currentTime; // 更新上次射击时间
+        }
+    }
  }
- 
+
+ void SceneMain::shootPlayer()
+ {
+ }
