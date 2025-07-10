@@ -8,6 +8,7 @@
 // 在这里引用是不想再CMake中添加Object.h的路径了一般只添加.cpp
 #include "Object.h"
 #include <list> // 引入 list容器
+#include <random> // 引入随机数生成器
 class Game;     // 前向声明Game类
 // 定义一个名为ScreneMain的类，继承自Scene类
 class SceneMain : public Scene
@@ -45,14 +46,29 @@ public:
     /// 渲染玩家子弹
     void renderPlayerProjectiles();
 
+    /// 生成敌人
+    void spawnEnemy();
+    /// 更新敌人
+    void updateEnemies(float deltaTime);
+    /// 渲染敌人
+    void renderEnemies();
 private:
     // 需要先在上面声明class Game;
     // 游戏对象引用
     Game &game;
 
     // 主场景里的初始化物体
-    // 玩具飞机对象
+    // 玩家飞机对象
     Player player;
+
+    std::mt19937 gen; // 随机数生成器
+    std::uniform_real_distribution<float> disX; // 水平位置随机分布
+
+    // 敌人飞机模板对象
+    Enemy enemyTemplate; 
+    // 敌人飞机列表
+    std::list<Enemy *> enemies; // 敌人类型的指针列表
+
 
     // 子弹模板对象 提前初始化好
     // 这里的projectilePlayerTemplate是一个子弹模板对象，用于创建子弹实例

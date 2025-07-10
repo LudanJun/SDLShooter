@@ -2,7 +2,7 @@
 #include "Game.h"
 #include <SDL.h>
 #include <SDL_image.h>
-
+#include <random>
 // 构造函数
 
 SceneMain ::SceneMain() : game(Game::getInstance())
@@ -18,6 +18,11 @@ SceneMain ::~SceneMain()
 // 1.初始化函数
 void SceneMain::init()
 {
+    // 初始化随机数引擎
+    std::random_device rd;                                    // 获取随机数种子
+    gen = std::mt19937(rd());                                 // 使用随机数种子初始化随机数生成器
+    disX = std::uniform_real_distribution<float>(0.0f, 1.0f); // 水平位置随机分布
+
     // TODO: 添加初始化代码
     // Game::getInstance() 获取game单例实例
     // getRenderer() 获取渲染器
@@ -36,29 +41,38 @@ void SceneMain::init()
     player.position.x = game.getWindowWidth() / 2 - player.width / 2; // 居中显示
     player.position.y = game.getWindowHeight() - player.height - 20;  // 底
 
-    // 初始化模版
+    // 初始化子弹模版
     projectilePlayerTemplate.texture = IMG_LoadTexture(game.getRenderer(), "assets/image/laser-1.png");
     // 获取子弹图片的宽和高
     SDL_QueryTexture(projectilePlayerTemplate.texture, nullptr, nullptr, &projectilePlayerTemplate.width, &projectilePlayerTemplate.height);
     projectilePlayerTemplate.width /= 4;  // 子弹宽度
     projectilePlayerTemplate.height /= 4; // 子弹高度
+
+    // 初始化敌人飞机模版
+    // 设置敌机纹理
+    enemyTemplate.texture = IMG_LoadTexture(game.getRenderer(), "assets/image/insect-2.png");
+    //  获取敌机图片的宽和高
+    SDL_QueryTexture(enemyTemplate.texture, nullptr, nullptr, &enemyTemplate.width, &enemyTemplate.height);
+    enemyTemplate.width /= 4;  // 敌机宽度
+    enemyTemplate.height /= 4; // 敌机高度
 }
 void SceneMain::update(float deltaTime)
 {
     // TODO: 在这里添加更新逻辑
-
     // 更新场景中的物体、角色等
-
     keyboardControl(deltaTime);
 
     updatePlayerProjectiles(deltaTime); // 更新玩家发射的子弹
+
+    spawnEnemy();             // 生成敌人
+    updateEnemies(deltaTime); // 更新敌人
 }
 
 // 2.渲染函数
 void SceneMain::render()
 {
-    // TODO: 添加渲染代码
-    renderPlayerProjectiles(); // 渲染玩家发射的子弹
+    // 渲染玩家发射的子弹
+    renderPlayerProjectiles();
     // 渲染玩家飞机
     SDL_Rect playerRect = {
         static_cast<int>(player.position.x),
@@ -68,6 +82,9 @@ void SceneMain::render()
     };
     // 渲染玩家飞机
     SDL_RenderCopy(game.getRenderer(), player.texture, nullptr, &playerRect);
+
+    // 渲染敌人飞机
+    renderEnemies();
 }
 
 // 处理事件
@@ -88,7 +105,18 @@ void SceneMain::clean()
             delete projectile; // 删除子弹实例
         }
     }
+
     projectilesPlayer.clear(); // 清空子弹列表
+
+    for (auto &enemy : enemies)
+    {
+        if (enemy != nullptr) // 检查敌人实例是否为空
+        {
+            delete enemy; // 删除敌人实例
+        }
+    }
+
+    enemies.clear(); // 清空敌人列表
 
     // 清理模版
     if (player.texture != nullptr)
@@ -98,6 +126,10 @@ void SceneMain::clean()
     if (projectilePlayerTemplate.texture != nullptr)
     {
         SDL_DestroyTexture(projectilePlayerTemplate.texture); // 销毁子弹纹理
+    }
+    if (enemyTemplate.texture != nullptr)
+    {
+        SDL_DestroyTexture(enemyTemplate.texture); // 销毁敌人飞机纹理
     }
 }
 
@@ -221,5 +253,65 @@ void SceneMain::renderPlayerProjectiles()
         };
         // 渲染子弹
         SDL_RenderCopy(game.getRenderer(), projectile->texture, nullptr, &projectileRect);
+    }
+}
+
+// 在SceneMain类中定义一个名为spawnEnemy的函数
+void SceneMain::spawnEnemy()
+{
+    // TODO: 在这里添加代码，用于生成敌人
+    if (disX(gen) > 1 / 60.0f)
+    {
+        return; // 如果生成的随机数大于1/60秒，则不生成敌人
+    }
+    // 创建一个新的敌人实例
+    // 使用enemyTemplate作为模板来创建新的敌人实例
+    // 这里的enemyTemplate是一个Enemy类型的对象，包含了敌人的纹理、位置、尺寸和速度等属性
+    // 通过使用enemyTemplate作为模板，可以快速创建新的敌人实例
+    Enemy *enemy = new Enemy(enemyTemplate);
+    enemy->position.x = disX(gen) * (game.getWindowWidth() - enemy->width); // 随机生成敌人的水平位置
+    enemy->position.y = -enemy->height;                                     // 设置敌人的初始位置在屏幕上方
+    enemies.push_back(enemy);                                               // 将新创建的敌人实例添加到敌人列表中
+}
+
+// 更新敌人
+void SceneMain::updateEnemies(float deltaTime)
+{
+    // TODO: 在这里添加更新敌人的代码
+    for (auto it = enemies.begin(); it != enemies.end();)
+    {
+        auto enemy = *it; // 获取当前敌人实例
+        // 更新敌人的位置
+        enemy->position.y += enemy->speed * deltaTime; // 敌人向下移动
+
+        // 检查敌人是否超出屏幕范围
+        if (enemy->position.y > game.getWindowHeight())
+        {
+            delete enemy;           // 删除敌人实例
+            it = enemies.erase(it); // 从敌人列表中删除敌人实例
+            SDL_Log("Enemy removed at position: (%.2f, %.2f)", enemy->position.x, enemy->position.y);
+        }
+        else
+        {
+            ++it; // 移动到下一个敌人实例
+        }
+    }
+}
+
+// 渲染敌人
+void SceneMain::renderEnemies()
+{
+    // TODO: 实现渲染敌人的代码
+    for (auto enemy : enemies)
+    {
+        // 计算敌人在屏幕上的位置
+        SDL_Rect enemyRect = {
+            static_cast<int>(enemy->position.x),
+            static_cast<int>(enemy->position.y),
+            enemy->width,
+            enemy->height,
+        };
+        // 渲染敌人
+        SDL_RenderCopy(game.getRenderer(), enemy->texture, NULL, &enemyRect);
     }
 }
