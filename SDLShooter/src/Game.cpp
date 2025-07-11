@@ -84,7 +84,7 @@ void Game::init()
 // 清理游戏
 void Game::clean()
 {
-    if (currentScene != nullptr)
+    if (currentScene != nullptr)// 检查当前场景是否为空
     {
         currentScene->clean(); // 清理当前场景
         delete currentScene;   // 删除当前场景对象

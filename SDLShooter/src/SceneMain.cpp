@@ -56,17 +56,6 @@ void SceneMain::init()
     enemyTemplate.width /= 4;  // 敌机宽度
     enemyTemplate.height /= 4; // 敌机高度
 }
-void SceneMain::update(float deltaTime)
-{
-    // TODO: 在这里添加更新逻辑
-    // 更新场景中的物体、角色等
-    keyboardControl(deltaTime);
-
-    updatePlayerProjectiles(deltaTime); // 更新玩家发射的子弹
-
-    spawnEnemy();             // 生成敌人
-    updateEnemies(deltaTime); // 更新敌人
-}
 
 // 2.渲染函数
 void SceneMain::render()
@@ -86,6 +75,19 @@ void SceneMain::render()
     // 渲染敌人飞机
     renderEnemies();
 }
+// 3. 更新
+void SceneMain::update(float deltaTime)
+{
+    // TODO: 在这里添加更新逻辑
+    // 更新场景中的物体、角色等
+    keyboardControl(deltaTime);
+
+    updatePlayerProjectiles(deltaTime); // 更新玩家发射的子弹
+
+    spawnEnemy();             // 生成敌人
+    updateEnemies(deltaTime); // 更新敌人
+}
+
 
 // 处理事件
 void SceneMain::handleEvent(SDL_Event *event)
@@ -184,7 +186,7 @@ void SceneMain::keyboardControl(float deltaTime)
         }
     }
 }
-
+//调用射击函数
 void SceneMain::shootPlayer()
 {
     // 在这里实现发射子弹的逻辑
