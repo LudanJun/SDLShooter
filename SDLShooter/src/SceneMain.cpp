@@ -55,6 +55,13 @@ void SceneMain::init()
     SDL_QueryTexture(enemyTemplate.texture, nullptr, nullptr, &enemyTemplate.width, &enemyTemplate.height);
     enemyTemplate.width /= 4;  // 敌机宽度
     enemyTemplate.height /= 4; // 敌机高度
+
+    // 初始化敌机子弹模版
+    projectileEnemyTemplate.texture = IMG_LoadTexture(game.getRenderer(), "assets/image/bullet-1.png");
+    // 获取敌机子弹图片的宽和高
+    SDL_QueryTexture(projectileEnemyTemplate.texture, nullptr, nullptr, &projectileEnemyTemplate.width, &projectileEnemyTemplate.height);
+    projectileEnemyTemplate.width /= 4;  // 敌机子弹宽度
+    projectileEnemyTemplate.height /= 4; // 敌机子弹高度
 }
 
 // 2.渲染函数
@@ -62,6 +69,8 @@ void SceneMain::render()
 {
     // 渲染玩家发射的子弹
     renderPlayerProjectiles();
+    // 渲染敌人发射的子弹
+    renderEnemyProjectiles();
     // 渲染玩家飞机
     SDL_Rect playerRect = {
         static_cast<int>(player.position.x),
@@ -83,11 +92,10 @@ void SceneMain::update(float deltaTime)
     keyboardControl(deltaTime);
 
     updatePlayerProjectiles(deltaTime); // 更新玩家发射的子弹
-
-    spawnEnemy();             // 生成敌人
-    updateEnemies(deltaTime); // 更新敌人
+    updateEnemyProjectiles(deltaTime);  // 更新敌人发射的子弹
+    spawnEnemy();                       // 生成敌人
+    updateEnemies(deltaTime);           // 更新敌人
 }
-
 
 // 处理事件
 void SceneMain::handleEvent(SDL_Event *event)
@@ -99,7 +107,7 @@ void SceneMain::handleEvent(SDL_Event *event)
 // 清空屏幕
 void SceneMain::clean()
 {
-    // 清理容器
+    // 循环清理玩家发射的子弹实例
     for (auto &projectile : projectilesPlayer)
     {
         if (projectile != nullptr) // 检查子弹实例是否为空
@@ -107,9 +115,9 @@ void SceneMain::clean()
             delete projectile; // 删除子弹实例
         }
     }
-
     projectilesPlayer.clear(); // 清空子弹列表
 
+    // 循环清理敌人实例
     for (auto &enemy : enemies)
     {
         if (enemy != nullptr) // 检查敌人实例是否为空
@@ -120,18 +128,36 @@ void SceneMain::clean()
 
     enemies.clear(); // 清空敌人列表
 
-    // 清理模版
+    // 清理敌人子弹
+    for (auto &projectile : projectilesEnemy)
+    {
+        if (projectile != nullptr) // 检查敌人子弹实例是否为空
+        {
+            delete projectile; // 删除敌人子弹实例
+        }
+    }
+    projectilesEnemy.clear(); // 清空敌人子弹列表
+
+    // 清理玩家飞机
     if (player.texture != nullptr)
     {
         SDL_DestroyTexture(player.texture); // 销毁玩家飞机纹理
     }
+    // 清理玩家子弹纹理
     if (projectilePlayerTemplate.texture != nullptr)
     {
         SDL_DestroyTexture(projectilePlayerTemplate.texture); // 销毁子弹纹理
     }
+    // 清理敌人飞机纹理
     if (enemyTemplate.texture != nullptr)
     {
         SDL_DestroyTexture(enemyTemplate.texture); // 销毁敌人飞机纹理
+    }
+
+    // 清理敌人子弹纹理
+    if (projectileEnemyTemplate.texture != nullptr)
+    {
+        SDL_DestroyTexture(projectileEnemyTemplate.texture); // 销毁敌人子弹纹理
     }
 }
 
@@ -186,7 +212,7 @@ void SceneMain::keyboardControl(float deltaTime)
         }
     }
 }
-//调用射击函数
+// 调用射击函数
 void SceneMain::shootPlayer()
 {
     // 在这里实现发射子弹的逻辑
@@ -231,7 +257,7 @@ void SceneMain::updatePlayerProjectiles(float deltaTime)
             // it所在的位置删除后会返回一个迭代器指针,指向下一个元素
             it = projectilesPlayer.erase(it); // 从子弹列表中删除子弹实例
             // 判断是否真的删除掉 打印
-            SDL_Log("Player projectile removed at position: (%.2f, %.2f)", projectile->position.x, projectile->position.y);
+            // SDL_Log("Player projectile removed at position: (%.2f, %.2f)", projectile->position.x, projectile->position.y);
         }
         else
         {
@@ -258,6 +284,24 @@ void SceneMain::renderPlayerProjectiles()
     }
 }
 
+// 渲染敌人子弹
+void SceneMain::renderEnemyProjectiles()
+{
+    // TODO: 实现渲染敌人子弹的功能
+    for (auto projectile : projectilesEnemy)
+    {
+        // 计算敌人子弹在屏幕上的位置
+        SDL_Rect projectileRect = {
+            static_cast<int>(projectile->position.x),
+            static_cast<int>(projectile->position.y),
+            projectile->width,
+            projectile->height,
+        };
+        // 渲染敌人子弹
+        SDL_RenderCopy(game.getRenderer(), projectile->texture, nullptr, &projectileRect);
+    }
+}
+
 // 在SceneMain类中定义一个名为spawnEnemy的函数
 void SceneMain::spawnEnemy()
 {
@@ -280,6 +324,8 @@ void SceneMain::spawnEnemy()
 void SceneMain::updateEnemies(float deltaTime)
 {
     // TODO: 在这里添加更新敌人的代码
+    // 获取当前时间
+    auto currentTime = SDL_GetTicks();
     for (auto it = enemies.begin(); it != enemies.end();)
     {
         auto enemy = *it; // 获取当前敌人实例
@@ -291,11 +337,55 @@ void SceneMain::updateEnemies(float deltaTime)
         {
             delete enemy;           // 删除敌人实例
             it = enemies.erase(it); // 从敌人列表中删除敌人实例
-            SDL_Log("Enemy removed at position: (%.2f, %.2f)", enemy->position.x, enemy->position.y);
+            // SDL_Log("Enemy removed at position: (%.2f, %.2f)", enemy->position.x, enemy->position.y);
+        }
+        else // 没有超出屏幕判断是否可以发射子弹了
+        {
+            /// 当前时间- enemy->lastShotTime > 冷却时间
+            if (currentTime - enemy->lastShotTime > enemy->coolDown)
+            {
+                shootEnemy(enemy);                 // 调用敌人射击函数
+                enemy->lastShotTime = currentTime; // 更新敌人上次射击时间
+            }
+            ++it; // 移动到下一个敌人实例
+        }
+    }
+}
+
+// 更新敌人子弹
+void SceneMain::updateEnemyProjectiles(float deltaTime)
+{
+    // TODO: 实现更新玩家发射的子弹的逻辑
+    // 从容器的起始点 开始遍历 终点是容器的结束点end
+    // it是个指针
+    auto margin = 32; // 子弹超出屏幕范围时移除
+    for (auto it = projectilesEnemy.begin(); it != projectilesEnemy.end();)
+    {
+        // 获取当前子弹实例
+        auto projectile = *it;
+        //
+        projectile->position.x += projectile->speed * projectile->direction.x * deltaTime;
+        projectile->position.y += projectile->speed * projectile->direction.y * deltaTime;
+
+        // 移动到下一个子弹实例
+        // projectile->position.y > game.getWindowHeight() + margin 子弹超出屏幕的正下方
+        // projectile->position.y < -margin 子弹超出屏幕的正上方
+        // projectile->position.x < -margin  子弹超出屏幕的左边
+        // projectile->position.x > game.getWindowWidth() + margin 子弹超出屏幕的右边
+        if (projectile->position.y > game.getWindowHeight() + margin ||
+            projectile->position.y < -margin ||
+            projectile->position.x < -margin ||
+            projectile->position.x > game.getWindowWidth() + margin) // 如果子弹超出屏幕上边界，则删除子弹实例
+        {
+            delete projectile;
+            // it所在的位置删除后会返回一个迭代器指针,指向下一个元素
+            it = projectilesEnemy.erase(it); // 从子弹列表中删除子弹实例
+            // 判断是否真的删除掉 打印
+            // SDL_Log("Player projectile removed at position: (%.2f, %.2f)", projectile->position.x, projectile->position.y);
         }
         else
         {
-            ++it; // 移动到下一个敌人实例
+            ++it;
         }
     }
 }
@@ -316,4 +406,31 @@ void SceneMain::renderEnemies()
         // 渲染敌人
         SDL_RenderCopy(game.getRenderer(), enemy->texture, NULL, &enemyRect);
     }
+}
+// 敌人飞机射击函数
+void SceneMain::shootEnemy(Enemy *enemy)
+{
+    // 创建敌机子弹
+    auto projectile = new ProjectileEnemy(projectileEnemyTemplate); // 创建新的敌人子弹实例
+    // 设置敌人子弹的位置
+    projectile->position.x = enemy->position.x + enemy->width / 2 - projectile->width / 2;   // 子弹位置居中
+    projectile->position.y = enemy->position.y + enemy->height / 2 - projectile->height / 2; // 子弹从敌人位置发射
+
+    projectile->direction = getDirection(enemy); // 获取敌人子弹的方向
+    projectilesEnemy.push_back(projectile);      // 将新创建的敌人子弹实例 添加到敌人子弹列表中
+    // SDL_Log("Enemy projectile shot from position: (%.2f, %.2f)", projectile->position.x, projectile->position.y);
+}
+
+// 获取敌人子弹方向
+SDL_FPoint SceneMain::getDirection(Enemy *enemy)
+{
+    // 玩家飞机的中心点 - 敌人飞机的中心点 得到的 x y 矢量就是子弹的方向
+    auto x = (player.position.x + player.width / 2) - (enemy->position.x + enemy->width / 2);
+    auto y = (player.position.y + player.height / 2) - (enemy->position.y + enemy->height / 2);
+    // 计算方向向量的长度(勾股定理)
+    auto length = sqrt(x * x + y * y);
+    x /= length; // 归一化 x 分量
+    y /= length; // 归一化 y 分量
+
+    return SDL_FPoint{x, y};
 }
