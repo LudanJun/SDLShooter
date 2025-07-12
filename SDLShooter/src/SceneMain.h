@@ -54,6 +54,9 @@ public:
     void updateEnemies(float deltaTime);
     /// 更新敌人发射的子弹
     void updateEnemyProjectiles(float deltaTime);
+    /// 更新玩家
+    void updatePlayer(float deltaTime);
+
     /// 渲染敌人
     void renderEnemies();
 
@@ -76,6 +79,7 @@ private:
     // 主场景里的初始化物体
     // 玩家飞机对象
     Player player;
+    bool isDead = false; // 玩家飞机是否死亡
 
     std::mt19937 gen;                           // 随机数生成器
     std::uniform_real_distribution<float> disX; // 水平位置随机分布

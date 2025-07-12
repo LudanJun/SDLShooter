@@ -71,15 +71,19 @@ void SceneMain::render()
     renderPlayerProjectiles();
     // 渲染敌人发射的子弹
     renderEnemyProjectiles();
+
     // 渲染玩家飞机
-    SDL_Rect playerRect = {
-        static_cast<int>(player.position.x),
-        static_cast<int>(player.position.y),
-        player.width,
-        player.height,
-    };
-    // 渲染玩家飞机
-    SDL_RenderCopy(game.getRenderer(), player.texture, nullptr, &playerRect);
+    if (isDead == false)
+    {
+        SDL_Rect playerRect = {
+            static_cast<int>(player.position.x),
+            static_cast<int>(player.position.y),
+            player.width,
+            player.height,
+        };
+        // 渲染玩家飞机
+        SDL_RenderCopy(game.getRenderer(), player.texture, nullptr, &playerRect);
+    }
 
     // 渲染敌人飞机
     renderEnemies();
@@ -95,6 +99,7 @@ void SceneMain::update(float deltaTime)
     updateEnemyProjectiles(deltaTime);  // 更新敌人发射的子弹
     spawnEnemy();                       // 生成敌人
     updateEnemies(deltaTime);           // 更新敌人
+    updatePlayer(deltaTime);            // 更新玩家飞机
 }
 
 // 处理事件
@@ -164,6 +169,11 @@ void SceneMain::clean()
 // SceneMain类中的keyboardControl函数，用于处理键盘控制
 void SceneMain::keyboardControl(float deltaTime)
 {
+    if (isDead)
+    {
+        // 如果玩家飞机已经死亡,不再处理键盘输入
+        return;
+    }
     // TODO: 实现键盘控制逻辑
     // 返回Uint8 类型的指针，指向一个数组，该数组包含当前所有按键的状态，如果某个按键被按下，则对应的数组元素为1，否则为0
     // 使用auto 关键字，让编译器自动推导出变量的类型
@@ -393,7 +403,8 @@ void SceneMain::updateEnemies(float deltaTime)
         {
             /// 当前时间- enemy->lastShotTime > 冷却时间
             // 检查敌人是否可以发射子弹
-            if (currentTime - enemy->lastShotTime > enemy->coolDown)
+            // 如果玩家没死亡继续发射子弹
+            if (currentTime - enemy->lastShotTime > enemy->coolDown && isDead == false)
             {
                 shootEnemy(enemy);                 // 调用敌人射击函数
                 enemy->lastShotTime = currentTime; // 更新敌人上次射击时间
@@ -448,7 +459,74 @@ void SceneMain::updateEnemyProjectiles(float deltaTime)
         }
         else
         {
-            ++it;
+            // 因为玩家就一个,所以不需要进行遍历操作
+            // 敌人子弹矩形
+            SDL_Rect projectileRect = {
+                static_cast<int>(projectile->position.x),
+                static_cast<int>(projectile->position.y),
+                projectile->width,
+                projectile->height,
+            };
+            // 玩家飞机矩形
+            SDL_Rect playerRect = {
+                static_cast<int>(player.position.x),
+                static_cast<int>(player.position.y),
+                player.width,
+                player.height,
+            };
+            // 检查敌人子弹是否与玩家飞机发生碰撞 如果玩家死亡不需要碰撞检测
+            if (SDL_HasIntersection(&projectileRect, &playerRect) && !isDead)
+            {
+                // 减少玩家飞机的生命值
+                player.currentHealth -= projectile->damage;
+                // 如果有碰撞 就把子弹删除
+                delete projectile;
+                it = projectilesEnemy.erase(it);
+            }
+            else
+            {
+                ++it;
+            }
+        }
+    }
+}
+
+// 更新玩家
+void SceneMain::updatePlayer(float deltaTime)
+{
+    if (isDead)
+    {
+        return;
+    }
+    if (player.currentHealth <= 0)
+    {
+        // TODO: 实现玩家死亡后的逻辑
+        // 例如: 游戏结束,切换场景等
+        isDead = true;              // 设置玩家死亡标志
+        SDL_Log("Player is dead!"); // 打印玩家死亡信息
+    }
+    // 进行玩家飞机与敌机的碰撞检测
+    // 玩家生命值-1 ,敌机直接爆炸
+    for (auto enemy : enemies)
+    {
+        // 检查玩家飞机与敌人飞机是否发生碰撞
+        SDL_Rect enemyRect = {
+            static_cast<int>(enemy->position.x),
+            static_cast<int>(enemy->position.y),
+            enemy->width,
+            enemy->height,
+        };
+        SDL_Rect playerRect = {
+            static_cast<int>(player.position.x),
+            static_cast<int>(player.position.y),
+            player.width,
+            player.height,
+        };
+        if (SDL_HasIntersection(&playerRect, &enemyRect))
+        {
+            // 玩家生命值-1 ,敌机直接爆炸
+            player.currentHealth -= 1;
+            enemy->currentHealth = 0;
         }
     }
 }
