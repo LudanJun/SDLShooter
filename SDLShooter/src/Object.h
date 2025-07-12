@@ -15,8 +15,9 @@ struct Player
     ///< 游戏对象的尺寸 玩家飞机的尺寸 初始化为0, 0尺寸
     int width = 0;
     int height = 0;
-    int speed = 200;         // 玩家飞机的速度 初始化为0
-    Uint32 coolDown = 500;   ///< 玩家飞机的冷却时间  500ms射击一次
+    int speed = 300;         // 玩家飞机的速度 初始化为0
+    int currentHealth = 3;   ///< 玩家飞机的当前生命值
+    Uint32 coolDown = 200;   ///< 玩家飞机的冷却时间  500ms射击一次
     Uint32 lastShotTime = 0; ///< 玩家飞机上次射击的时间戳
 };
 // 敌机
@@ -27,6 +28,7 @@ struct Enemy
     int width = 0;
     int height = 0;
     int speed = 200;
+    int currentHealth = 2;   ///< 敌机的当前生命值
     Uint32 coolDown = 2000;  ///< 敌机飞机的冷却时间  1000ms射击一次
     Uint32 lastShotTime = 0; ///< 敌机飞机上次射击的时间戳
 };
@@ -45,6 +47,7 @@ struct ProjectilePlayer
     int height = 0;
     ///< 子弹的速度
     int speed = 400;
+    int damage = 1; ///< 子弹的伤害值 攻击力
 };
 
 // 敌机子弹
@@ -64,6 +67,7 @@ struct ProjectileEnemy
     int height = 0;
     ///< 子弹的速度
     int speed = 400;
+    int damage = 1; ///< 子弹的伤害值 攻击力
 };
 
 #endif // OBJECT_H

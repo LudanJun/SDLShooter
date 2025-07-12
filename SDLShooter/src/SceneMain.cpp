@@ -261,7 +261,45 @@ void SceneMain::updatePlayerProjectiles(float deltaTime)
         }
         else
         {
-            ++it;
+            bool isHit = false;
+            // 没有超出屏幕遍历所有地方
+            for (auto &enemy : enemies)
+            {
+                // 敌方飞机矩形区域
+                SDL_Rect enemyRect = {
+                    static_cast<int>(enemy->position.x),
+                    static_cast<int>(enemy->position.y),
+                    enemy->width,
+                    enemy->height,
+                };
+                // 子弹矩形区域
+                SDL_Rect projectileRect = {
+                    static_cast<int>(projectile->position.x),
+                    static_cast<int>(projectile->position.y),
+                    projectile->width,
+                    projectile->height,
+                };
+
+                if (SDL_HasIntersection(&projectileRect, &enemyRect))
+                {
+                    // 子弹击中敌人
+                    // 先减少敌方血量 要用到projectile->damage
+                    // 减少敌人的生命值
+                    enemy->currentHealth -= projectile->damage;
+                    // 再删除子弹实例
+                    delete projectile;
+                    // 从子弹列表中删除子弹实例
+                    // 删除之后,it会自加
+                    it = projectilesPlayer.erase(it);
+                    isHit = true; // 标记子弹击中敌人
+                    break;        // 跳出循环
+                }
+            }
+            // 如果子弹没有击中任何敌人，则继续遍历下一个子弹实例
+            if (!isHit)
+            {
+                ++it;
+            }
         }
     }
 }
@@ -354,12 +392,25 @@ void SceneMain::updateEnemies(float deltaTime)
         else // 没有超出屏幕判断是否可以发射子弹了
         {
             /// 当前时间- enemy->lastShotTime > 冷却时间
+            // 检查敌人是否可以发射子弹
             if (currentTime - enemy->lastShotTime > enemy->coolDown)
             {
                 shootEnemy(enemy);                 // 调用敌人射击函数
                 enemy->lastShotTime = currentTime; // 更新敌人上次射击时间
             }
-            ++it; // 移动到下一个敌人实例
+            // 检查敌人是否死亡
+            if (enemy->currentHealth <= 0)
+            {
+                // 敌人死亡 添加音效 和爆炸特效 封装成一个函数
+                //  delete enemy;           // 删除敌人实例
+                enemyExplosion(enemy);  // 调用敌人爆炸函数
+                it = enemies.erase(it); // 从敌人列表中删除敌人实例
+            }
+            else
+            {
+                // 如果 敌方飞机没有死亡 不需要++it
+                ++it; // 移动到下一个敌人实例
+            }
         }
     }
 }
@@ -445,4 +496,12 @@ SDL_FPoint SceneMain::getDirection(Enemy *enemy)
     y /= length; // 归一化 y 分量
 
     return SDL_FPoint{x, y};
+}
+
+// 函数：敌人爆炸
+// 参数：敌人指针
+void SceneMain::enemyExplosion(Enemy *enemy)
+{
+    // TODO: 实现敌人爆炸效果
+    delete enemy; // 删除敌人实例
 }

@@ -47,7 +47,7 @@ public:
     void renderPlayerProjectiles();
     /// 渲染敌人子弹
     void renderEnemyProjectiles();
-    
+
     /// 生成敌人
     void spawnEnemy();
     /// 更新敌人
@@ -64,6 +64,9 @@ public:
     // 传入敌机指针,去计算方向,因为玩家Player在私有成员变量里可以获取到不用传
     // 返回值是Point
     SDL_FPoint getDirection(Enemy *enemy);
+
+    // 敌机爆炸函数
+    void enemyExplosion(Enemy *enemy);
 
 private:
     // 需要先在上面声明class Game;
