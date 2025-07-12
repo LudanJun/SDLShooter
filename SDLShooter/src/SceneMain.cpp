@@ -298,7 +298,19 @@ void SceneMain::renderEnemyProjectiles()
             projectile->height,
         };
         // 渲染敌人子弹
-        SDL_RenderCopy(game.getRenderer(), projectile->texture, nullptr, &projectileRect);
+        // 计算翻转的角度
+        // SDL_FPoint direction = {0, 0}; 这个空间二维向量可以转成角度的
+        // 算出来的是弧度 需要*180/M_PI 转成角度
+        float angle = atan2(projectile->direction.y, projectile->direction.x) * 180 / M_PI - 90;
+
+        // SDL_RenderCopy(game.getRenderer(), projectile->texture, nullptr, &projectileRect);
+        // SDL_RenderCopyEx函数用于渲染带有旋转和翻转效果
+        // angle: 这里的0.0表示不旋转
+        // center: 这里的NULL表示不使用中心点旋转
+        // flip: 这里的SDL_FLIP_NONE表示不进行翻转
+
+        SDL_RenderCopyEx(game.getRenderer(), projectile->texture, nullptr, &projectileRect,
+                         angle, NULL, SDL_FLIP_NONE); // 渲染敌人子弹
     }
 }
 

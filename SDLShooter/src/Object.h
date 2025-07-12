@@ -27,8 +27,8 @@ struct Enemy
     int width = 0;
     int height = 0;
     int speed = 200;
-    Uint32 coolDown = 1000;   ///< 玩家飞机的冷却时间  1000ms射击一次
-    Uint32 lastShotTime = 0; ///< 玩家飞机上次射击的时间戳
+    Uint32 coolDown = 2000;  ///< 敌机飞机的冷却时间  1000ms射击一次
+    Uint32 lastShotTime = 0; ///< 敌机飞机上次射击的时间戳
 };
 
 // 子弹类
