@@ -30,7 +30,7 @@ struct Player
     int speed = 300;         // 玩家飞机的速度 初始化为0
     int currentHealth = 3;   ///< 玩家飞机的当前生命值
     int maxHealth = 3;       ///< 玩家飞机的最大生命值
-    Uint32 coolDown = 100;   ///< 玩家飞机的冷却时间  200ms射击一次
+    Uint32 coolDown = 200;   ///< 玩家飞机的冷却时间  200ms射击一次
     Uint32 lastShotTime = 0; ///< 玩家飞机上次射击的时间戳
 };
 // 敌机
@@ -109,7 +109,17 @@ struct Item
     int bounceCount = 3;            ///< 物品的反弹次数
     ItemType type = ItemType::Life; ///< 物品类型
     Uint32 spawnTime = 0;           ///< 物品生成时间戳
-    Uint32 duration = 5000;         ///< 物品持续时间 5秒
+};
+
+/// @brief 背景
+struct Background
+{
+    SDL_Texture *texture = nullptr; ///< 背景的纹理
+    SDL_FPoint position = {0, 0};   ///< 背景的位置
+    float offset = 0;               ///< 背景的偏移量 对于y轴的偏移量用于滚动背景
+    int width = 0;                  ///< 背景的宽度
+    int height = 0;                 ///< 背景的高度
+    int speed = 30;                 ///< 背景的滚动速度
 };
 
 #endif // OBJECT_H

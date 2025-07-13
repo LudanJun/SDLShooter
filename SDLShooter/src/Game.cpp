@@ -58,8 +58,8 @@ void Game::init()
     }
     // 创建窗口
     // SDL_WINDOWPOS_CENTERED：窗口位置居中
-    // SDL_WINDOW_SHOW ：窗口显示
-    window = SDL_CreateWindow("SDL Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
+    // SDL_WINDOW_SHOW ：窗口显示 京饿了美CNM配送员 我和我的五个儿子们
+    window = SDL_CreateWindow("太空大战初学版", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
     if (window == nullptr)
     {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL could not create window! SDL_Error: %s\n", SDL_GetError());
@@ -104,6 +104,29 @@ void Game::init()
     // channel:-1表示所有通道 默认8个音效 超过8个音效会覆盖
     Mix_Volume(-1, MIX_MAX_VOLUME / 8);
 
+
+    // 初始化TTF
+    if (TTF_Init() == -1)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL_ttf could not initialize! TTF_Error: %s\n", TTF_GetError());
+        isRunning = false; // 初始化TTF失败，设置游戏运行状态为false
+    }
+
+    // 初始化背景卷轴
+    // 近处星空背景
+    nearStars.texture = IMG_LoadTexture(renderer, "assets/image/Stars-A.png");
+    // 获取纹理的宽度和高度
+    SDL_QueryTexture(nearStars.texture, NULL, NULL, &nearStars.width, &nearStars.height);
+    nearStars.height /= 2; // 将高度缩小一半
+    nearStars.width /= 2;  // 将宽度缩小一半
+
+    // 远处星空背景
+    farStars.texture = IMG_LoadTexture(renderer, "assets/image/Stars-B.png");
+    // 获取纹理的宽度和高度
+    SDL_QueryTexture(farStars.texture, NULL, NULL, &farStars.width, &farStars.height);
+    farStars.speed = 20;            // 远处星空背景滚动速度
+    farStars.height /= 2;           // 将高度缩小一半
+    farStars.width /= 2;            // 将宽度缩小一半
     currentScene = new SceneMain(); // 创建一个新的场景对象
     currentScene->init();           // 初始化当前场景
 }
@@ -116,11 +139,24 @@ void Game::clean()
         currentScene->clean(); // 清理当前场景
         delete currentScene;   // 删除当前场景对象
     }
+    if (nearStars.texture != nullptr) // 检查近处星空背景纹理是否为空
+    {
+        SDL_DestroyTexture(nearStars.texture); // 销毁近处星空背景纹理
+    }
+    if (farStars.texture != nullptr) // 检查远处星空背景纹理是否为空
+    {
+        SDL_DestroyTexture(farStars.texture); // 销毁远处星空背景纹理
+    }
+
     // 清理SDL_image
     IMG_Quit();
     // 清理SDL_mixer
     Mix_CloseAudio(); // 关闭音频设备
     Mix_Quit();       // 退出SDL_mixer
+
+    // 清理SDL_ttf
+    TTF_Quit(); // 退出SDL_ttf
+
     // 清理游戏资源
     SDL_DestroyRenderer(renderer); // 销毁渲染器
     SDL_DestroyWindow(window);     // 销毁窗口
@@ -157,14 +193,65 @@ void Game::handleEvent(SDL_Event *event)
 
 void Game::update(float deltaTime)
 {
+    backgroundUpdate(deltaTime);     // 更新背景滚动
     currentScene->update(deltaTime); //   更新当前场景
 }
 
 void Game::render()
 { // 清空
     SDL_RenderClear(renderer);
+    // 渲染星空背景
+    renderBackground();
+
     // 渲染当前场景
     currentScene->render();
     // 显示更新
     SDL_RenderPresent(renderer);
+}
+
+// 更新游戏背景
+void Game::backgroundUpdate(float deltaTime)
+{
+    // TODO: 在这里添加更新游戏背景的代码
+    nearStars.offset += nearStars.speed * deltaTime; // 更新近处星空背景偏移
+    if (nearStars.offset >= 0)                       // 如果偏移量超过高度
+    {
+        nearStars.offset -= nearStars.height; // 重置偏移量
+    }
+
+    farStars.offset += farStars.speed * deltaTime; // 更新远处星空背景偏移
+    if (farStars.offset >= 0)                      // 如果偏移量超过高度
+    {
+        farStars.offset -= farStars.height; // 重置偏移量
+    }
+}
+
+// 渲染背景
+void Game::renderBackground()
+{
+    // TODO: 实现渲染背景的功能
+    // 渲染远处星空背景
+
+    for (int posY = static_cast<int>(farStars.offset); posY < getWindowHeight(); posY += farStars.height)
+    {
+        for (int posX = 0; posX < getWindowWidth(); posX += farStars.width)
+        {
+            SDL_Rect dstRect = {posX, posY, farStars.width, farStars.height}; // 设置渲染区域
+            SDL_RenderCopy(renderer, farStars.texture, nullptr, &dstRect);    // 渲染远处星空背景
+        }
+    }
+
+    // 渲染近处星空背景
+    // 这里渲染星空背景需要for循环
+    // 在更新的时候已经得到了offset,通过offset得到每个图片的y坐标
+
+    // posY = 0; 从0开始渲染 当posY小于窗口高度时渲染 不再渲染
+    for (int posY = static_cast<int>(nearStars.offset); posY < getWindowHeight(); posY += nearStars.height)
+    {
+        for (int posX = 0; posX < getWindowWidth(); posX += nearStars.width)
+        {
+            SDL_Rect dstRect = {posX, posY, nearStars.width, nearStars.height}; // 设置渲染区域
+            SDL_RenderCopy(renderer, nearStars.texture, nullptr, &dstRect);     // 渲染近处星空背景
+        }
+    }
 }

@@ -28,6 +28,17 @@ void SceneMain::init()
     // 播放 背景音乐
     Mix_PlayMusic(bgm, -1);
 
+    // 初始化UI血条图标
+    uiHealth = IMG_LoadTexture(game.getRenderer(), "assets/image/Health UI Black.png");
+
+    /// @brief 加载字体
+    /// 字体文件是12px 设置24px大小 尽量是倍数
+    scoreFont = TTF_OpenFont("assets/font/VonwaonBitmap-12px.ttf", 24);
+    if (scoreFont == nullptr)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Failed to load font: %s", TTF_GetError());
+    }
+
     // 读取音效资源
     sounds["player_shoot"] = Mix_LoadWAV("assets/sound/laser_shoot4.wav"); // 玩家射击音效
     sounds["enemy_shoot"] = Mix_LoadWAV("assets/sound/xs_laser.wav");      // 敌军射击音效
@@ -122,6 +133,9 @@ void SceneMain::render()
     renderItems();
     // 渲染爆炸效果 让爆炸效果显示在最上面
     renderExplosions();
+
+    // 渲染UI血条
+    renderUIHealth();
 }
 // 3. 更新
 void SceneMain::update(float deltaTime)
@@ -209,6 +223,18 @@ void SceneMain::clean()
         }
     }
     items.clear(); // 清空物品列表
+
+    // 清理UI血量条
+    if (uiHealth != nullptr)
+    {
+        SDL_DestroyTexture(uiHealth); // 销毁UI血条图标纹理
+    }
+
+    // 清理字体
+    if (scoreFont != nullptr)
+    {
+        TTF_CloseFont(scoreFont); // 关闭字体
+    }
 
     // 清理玩家飞机
     if (player.texture != nullptr)
@@ -506,7 +532,7 @@ void SceneMain::updateEnemies(float deltaTime)
             // 检查敌人是否死亡
             if (enemy->currentHealth <= 0)
             {
-                // 敌人死亡 添加音效 和爆炸特效 封装成一个函数
+                // 敌人死亡 添加音效 和爆炸特效 得分 封装成一个函数
                 //  delete enemy;           // 删除敌人实例
                 enemyExplode(enemy);    // 调用敌人爆炸函数
                 it = enemies.erase(it); // 从敌人列表中删除敌人实例
@@ -718,6 +744,7 @@ void SceneMain::enemyExplode(Enemy *enemy)
         // 爆炸后掉落物品
         dropItem(enemy); // 调用掉落物品函数
     }
+    score += 10; // 增加分数
 
     // 删除敌人实例
     delete enemy;
@@ -890,6 +917,7 @@ void SceneMain::updateItems(float deltaTime)
 /// @note  玩家获取道具后,可以增加玩家的生命值或其他属性
 void SceneMain::playerGetItem(Item *item)
 {
+    score += 5; // 获取道具后增加分数
     // 检查物品类型是否为生命道具
     if (item->type == ItemType::Life)
     {
@@ -922,4 +950,50 @@ void SceneMain::renderItems()
         // 渲染物品道具
         SDL_RenderCopy(game.getRenderer(), item->texture, nullptr, &itemRect);
     }
+}
+
+// 渲染UI血条 和得分
+void SceneMain::renderUIHealth()
+{
+    // TODO: 实现渲染UI健康的方法
+    int x = 10;
+    int y = 10;
+    int size = 32;                                   // 血图标大小
+    int offset = 40;                                 // 间隙
+    SDL_SetTextureColorMod(uiHealth, 100, 100, 100); // 设置UI血条颜色 将颜色变淡
+    // 通过玩家血值循环计算血条位置 这个是底色 就是中弹之后变灰色
+    for (int i = 0; i < player.maxHealth; i++)
+    {
+        SDL_Rect rect = {x + i * offset, y, size, size};
+        SDL_RenderCopy(game.getRenderer(), uiHealth, nullptr, &rect);
+    }
+
+    SDL_SetTextureColorMod(uiHealth, 255, 255, 255); // 设置UI血条颜色 将颜色还原
+    for (int i = 0; i < player.currentHealth; i++)
+    {
+        SDL_Rect rect = {x + i * offset, y, size, size};
+        SDL_RenderCopy(game.getRenderer(), uiHealth, nullptr, &rect);
+    }
+
+    /// 渲染得分
+    // 1.创建文字纹理
+    // std::to_string(score) 将得分整型转换为字符串
+    auto text = "SCORE:" + std::to_string(score);
+    // 传入字体
+    // 传入文字
+    // 传入颜色
+    SDL_Color color = {255, 255, 255, 255};
+    //  TTF_RenderUTF8_Solid(字体, 文字, 颜色)
+    //  SDL_Surface 可以获取文字的宽和高 就不需要用SDL_QueryTexture
+    SDL_Surface *surface = TTF_RenderUTF8_Solid(scoreFont, text.c_str(), color);
+    // 渲染器文字
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(game.getRenderer(), surface);
+    // 设置位置
+    SDL_Rect rect = {game.getWindowWidth() - surface->w - 10, 10, surface->w, surface->h};
+    // 渲染
+    SDL_RenderCopy(game.getRenderer(), texture, nullptr, &rect);
+    // 释放
+    SDL_FreeSurface(surface);
+    // 删除
+    SDL_DestroyTexture(texture);
 }

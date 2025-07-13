@@ -51,7 +51,10 @@
     "variant": "cpp",
     "vector": "cpp",
     "algorithm": "cpp",
-    "list": "cpp"
+    "list": "cpp",
+    "__config": "cpp",
+    "__tree": "cpp",
+    "map": "cpp"
   },
   "commentTranslate.hover.enabled": true,
   "C_Cpp.errorSquiggles": "enabled"

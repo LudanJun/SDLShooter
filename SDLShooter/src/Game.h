@@ -4,6 +4,7 @@
 
 #include "Scene.h"
 #include "SDL.h"
+#include "Object.h"
 
 /// @brief  游戏类
 /// 负责游戏的初始化、运行、事件处理、更新和渲染等功能
@@ -46,6 +47,14 @@ public:
     void update(float deltaTime);
     // 渲染游戏画面
     void render();
+
+    /// @brief 更新背景滚动
+    /// @param deltaTime
+    void backgroundUpdate(float deltaTime);
+
+    /// @brief 渲染背景
+    void renderBackground();
+
     // 获取渲染器
     SDL_Renderer *getRenderer() { return renderer; };
     // 获取窗口
@@ -72,6 +81,9 @@ private: // 私有成员
     int FPS = 60;           // 帧率
     Uint32 frameTime;       // 帧开始时间
     float deltaTime;        // 帧间隔时间
+
+    Background nearStars; ///< 近处星空背景
+    Background farStars;  ///< 远处星空背景
 };
 
 #endif

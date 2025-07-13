@@ -12,6 +12,7 @@
 #include <map>         // 引入 map容器
 #include <SDL.h>       // 引入SDL库
 #include <SDL_mixer.h> // 引入SDL_mixer库
+#include <SDL_ttf.h>   // 引入SDL_ttf库
 
 class Game; // 前向声明Game类
 // 定义一个名为ScreneMain的类，继承自Scene类
@@ -92,6 +93,9 @@ public:
     // 渲染掉落物品
     void renderItems();
 
+    // 渲染UI血条
+    void renderUIHealth();
+
 private:
     // 需要先在上面声明class Game;
 
@@ -99,8 +103,12 @@ private:
 
     // 主场景里的初始化物体
 
-    Player player;                              // 玩家飞机对象
-    Mix_Music *bgm;                             // 背景音乐对象
+    Player player;         // 玩家飞机对象
+    Mix_Music *bgm;        // 背景音乐对象
+    SDL_Texture *uiHealth; // UI血条图标纹理
+    TTF_Font *scoreFont;   // 字体对象
+    int score = 0;         // 得分
+
     bool isDead = false;                        // 玩家飞机是否死亡
     std::mt19937 gen;                           // 随机数生成器
     std::uniform_real_distribution<float> disX; // 水平位置随机分布
