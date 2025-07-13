@@ -2,6 +2,18 @@
 #define OBJECT_H
 
 #include <SDL.h>
+/// @brief 物品类型枚举
+/// C++11引入的枚举类 推荐加入关键字class
+enum class ItemType
+{
+    Life,   ///< 生命值物品
+    Shield, ///< 护盾物品
+    Time    ///< 时间物品
+    // Speed,  ///< 速度物品
+    // Damage, ///< 攻击力物品
+    // Score,  ///< 分数物品
+    // Unknown ///< 未知物品类型
+};
 
 /// @brief 游戏对象基类
 struct Player
@@ -17,6 +29,7 @@ struct Player
     int height = 0;
     int speed = 300;         // 玩家飞机的速度 初始化为0
     int currentHealth = 3;   ///< 玩家飞机的当前生命值
+    int maxHealth = 3;       ///< 玩家飞机的最大生命值
     Uint32 coolDown = 300;   ///< 玩家飞机的冷却时间  500ms射击一次
     Uint32 lastShotTime = 0; ///< 玩家飞机上次射击的时间戳
 };
@@ -80,7 +93,23 @@ struct Explosion
     int currentFrame = 0;           ///< 当前帧索引
     int totalFrame = 0;             ///< 总帧数
     Uint32 startTime = 0;           ///< 爆炸开始时间戳
-    Uint32 FPS = 10;                 ///< 每秒执行10帧
+    Uint32 FPS = 10;                ///< 每秒执行10帧
+};
+
+/// @brief  物品结构体
+/// 物品可以是生命值、护盾、时间等
+struct Item
+{
+    SDL_Texture *texture = nullptr; ///< 物品的纹理
+    SDL_FPoint position = {0, 0};   ///< 物品的位置
+    SDL_FPoint direction = {0, 0};  ///< 物品的方向
+    int width = 0;                  ///< 物品的宽度
+    int height = 0;                 ///< 物品的高度
+    int speed = 200;                ///< 物品的速度
+    int bounceCount = 3;            ///< 物品的反弹次数
+    ItemType type = ItemType::Life; ///< 物品类型
+    Uint32 spawnTime = 0;           ///< 物品生成时间戳
+    Uint32 duration = 5000;         ///< 物品持续时间 5秒
 };
 
 #endif // OBJECT_H

@@ -69,6 +69,13 @@ void SceneMain::init()
     SDL_QueryTexture(explosionTemplate.texture, nullptr, nullptr, &explosionTemplate.width, &explosionTemplate.height);
     explosionTemplate.totalFrame = explosionTemplate.width / explosionTemplate.height; // 爆炸总帧数
     explosionTemplate.width = explosionTemplate.height;                                // 爆炸宽度=高度
+
+    // 初始化生命道具模版
+    itemLifeTemplate.texture = IMG_LoadTexture(game.getRenderer(), "assets/image/bonus_life.png");
+    // 获取生命道具图片的宽和高
+    SDL_QueryTexture(itemLifeTemplate.texture, nullptr, nullptr, &itemLifeTemplate.width, &itemLifeTemplate.height);
+    itemLifeTemplate.width /= 4;  // 生命道具宽度
+    itemLifeTemplate.height /= 4; // 生命道具高度
 }
 
 // 2.渲染函数
@@ -94,8 +101,9 @@ void SceneMain::render()
 
     // 渲染敌人飞机
     renderEnemies();
-
-    // 渲染爆炸效果
+    // 渲染生命道具
+    renderItems();
+    // 渲染爆炸效果 让爆炸效果显示在最上面
     renderExplosions();
 }
 // 3. 更新
@@ -111,6 +119,7 @@ void SceneMain::update(float deltaTime)
     updateEnemies(deltaTime);           // 更新敌人
     updatePlayer();                     // 更新玩家飞机
     updateExplosions();                 // 更新爆炸效果
+    updateItems(deltaTime);             // 更新物品道具
 }
 
 // 处理事件
@@ -164,6 +173,16 @@ void SceneMain::clean()
     }
     explosions.clear(); // 清空爆炸效果列表
 
+    // 清理物品道具
+    for (auto &item : items)
+    {
+        if (item != nullptr) // 检查物品实例是否为空
+        {
+            delete item; // 删除物品实例
+        }
+    }
+    items.clear(); // 清空物品列表
+
     // 清理玩家飞机
     if (player.texture != nullptr)
     {
@@ -190,6 +209,12 @@ void SceneMain::clean()
     if (explosionTemplate.texture != nullptr)
     {
         SDL_DestroyTexture(explosionTemplate.texture); // 销毁爆炸效果纹理
+    }
+
+    // 清理生命物品纹理
+    if (itemLifeTemplate.texture != nullptr)
+    {
+        SDL_DestroyTexture(itemLifeTemplate.texture); // 销毁生命物品纹理
     }
 }
 
@@ -441,7 +466,7 @@ void SceneMain::updateEnemies(float deltaTime)
             {
                 // 敌人死亡 添加音效 和爆炸特效 封装成一个函数
                 //  delete enemy;           // 删除敌人实例
-                enemyExplosion(enemy);  // 调用敌人爆炸函数
+                enemyExplode(enemy);    // 调用敌人爆炸函数
                 it = enemies.erase(it); // 从敌人列表中删除敌人实例
             }
             else
@@ -615,7 +640,7 @@ SDL_FPoint SceneMain::getDirection(Enemy *enemy)
 // 函数：敌人爆炸
 // 参数：敌人指针
 // 生成爆炸
-void SceneMain::enemyExplosion(Enemy *enemy)
+void SceneMain::enemyExplode(Enemy *enemy)
 {
     // TODO: 实现敌人爆炸效果
     // 添加敌机爆炸特效 需要知道敌机位置,从正中间爆炸
@@ -631,6 +656,17 @@ void SceneMain::enemyExplosion(Enemy *enemy)
     explosion->startTime = currentTime;
     // 将新创建的爆炸实例添加到爆炸容器中
     explosions.push_back(explosion);
+    // 根据概率掉落物品道具 50%概率掉落物品
+    // 使用随机数生成器生成一个0到1之间的随机数
+    // 如果生成的随机数小于0.5，则掉落物品
+    // disX是一个均匀分布的随机数生成器,范围在0.0到1.0之间
+    // 通过调用disX(gen)生成一个随机数
+    if (disX(gen) < 0.5f)
+    {
+        // 爆炸后掉落物品
+        dropItem(enemy); // 调用掉落物品函数
+    }
+
     // 删除敌人实例
     delete enemy;
 }
@@ -684,5 +720,151 @@ void SceneMain::renderExplosions()
                             explosion->height};
         // 渲染爆炸特效
         SDL_RenderCopy(game.getRenderer(), explosion->texture, &srcRect, &dstRect);
+    }
+}
+/// @brief 掉落物品
+/// @note  当敌人被击败时,有一定概率掉落物品
+///        物品可以是生命道具等
+///        掉落物品的概率可以通过随机数来控制
+/// @param enemy
+void SceneMain::dropItem(Enemy *enemy)
+{
+    auto item = new Item(itemLifeTemplate);                                      // 创建新的物品实例
+    item->position.x = enemy->position.x + enemy->width / 2 - item->width / 2;   // 设置物品位置
+    item->position.y = enemy->position.y + enemy->height / 2 - item->height / 2; // 设置物品位置
+    // 不用对direction方向的x,y来进行随机,
+    // 可以随机生成一个角度,
+    // disX(gen) * 2 * M_PI得到一个0-360的角度
+    float angle = disX(gen) * 2 * M_PI; // 随机生成一个角度
+    // 计算物品的方向向量
+    // 物品的方向向量可以通过角度的余弦和正弦来计算
+    // 物品的方向向量是一个二维向量,
+    // 其中x分量是角度的余弦值,y分量是角度的正弦值
+    // 这样可以确保物品在掉落时沿着随机方向移动
+    // 这样算出的x和y 已经是归一化的了
+    item->direction.x = cos(angle); // 计算物品的x方向
+    item->direction.y = sin(angle); // 计算物品的y方向
+    items.push_back(item);          // 将新创建的物品实例添加到物品列表中
+    // SDL_Log("Item dropped at position
+}
+/// brief 更新物品道具
+void SceneMain::updateItems(float deltaTime)
+{
+    for (auto it = items.begin(); it != items.end();)
+    {
+        auto item = *it; // 获取当前物品实例
+
+        // 更新物品位置
+        item->position.x += item->direction.x * item->speed * deltaTime;
+        item->position.y += item->direction.y * item->speed * deltaTime;
+
+        // 超出屏幕范围之前处理反弹问题
+        // 碰到左边界
+        if (item->position.x < 0 && item->bounceCount > 0)
+        {
+            item->direction.x = -item->direction.x; // 反弹
+            item->bounceCount--;                    // 减少反弹计数
+        }
+        // 碰到右边界
+        if (item->position.x + item->width > game.getWindowWidth() && item->bounceCount > 0)
+        {
+            item->direction.x = -item->direction.x; // 反弹
+            item->bounceCount--;                    // 减少反弹计数
+        }
+        // 碰到上边界
+        if (item->position.y < 0 && item->bounceCount > 0 && item->bounceCount > 0)
+        {
+            item->direction.y = -item->direction.y; // 反弹
+            item->bounceCount--;                    // 减少反弹计数
+        }
+        // 碰到下边界
+        if (item->position.y + item->height > game.getWindowHeight() && item->bounceCount > 0)
+        {
+            item->direction.y = -item->direction.y; // 反弹
+            item->bounceCount--;                    // 减少反弹计数
+        }
+
+        // 生命周期判断 如果超出屏幕范围则删除
+        if (item->position.x + item->width < 0 ||
+            item->position.x > game.getWindowWidth() ||
+            item->position.y + item->height < 0 ||
+            item->position.y > game.getWindowHeight())
+        {
+            delete item;          // 删除物品实例
+            it = items.erase(it); // 从物品列表中删除物品实例
+            // SDL_Log("Item removed at position: (%.2f, %.2f)",
+        }
+
+        // 玩家的碰撞检测 需要先创建两个SDL_Rect矩形
+        else
+        {
+            // 创建物品矩形
+            // SDL_Rect是SDL库中用于表示矩形的结构体
+            // 它包含了矩形的x和y坐标,以及宽度和高度
+            // 通过SDL_Rect可以方便地进行矩形的碰撞检测和
+            SDL_Rect itemRect = {
+                static_cast<int>(item->position.x),
+                static_cast<int>(item->position.y),
+                item->width,
+                item->height,
+            };
+            /// 创建玩家飞机矩形
+            SDL_Rect playerRect = {
+                static_cast<int>(player.position.x),
+                static_cast<int>(player.position.y),
+                player.width,
+                player.height,
+            };
+            // 检查物品与玩家飞机是否发生碰撞
+            if (SDL_HasIntersection(&itemRect, &playerRect))
+            {
+                // 如果发生碰撞 玩具获取道具
+                // 因为在迭代器里面, 所以只在获取道具函数里处理道具逻辑
+                playerGetItem(item);  // 调用玩家获取道具函数
+                delete item;          // 删除物品实例
+                it = items.erase(it); // 从物品列表中删除物品实例
+            }
+            else
+            {
+                ++it; // 移动到下一个物品实例
+            }
+        }
+    }
+}
+
+/// @brief 玩家获取道具
+/// @param item 物品道具指针
+/// @note  玩家获取道具后,可以增加玩家的生命值或其他属性
+void SceneMain::playerGetItem(Item *item)
+{
+    // 检查物品类型是否为生命道具
+    if (item->type == ItemType::Life)
+    {
+        player.currentHealth += 1; // 增加玩家的生命值
+        if (player.currentHealth > player.maxHealth)
+        {
+            // 确保生命值不超过最大值
+            player.currentHealth = player.maxHealth;
+        }
+        SDL_Log("Player gained a life! Current health: %d", player.currentHealth);
+    }
+    // TODO: 可以添加其他物品类型的处理逻辑
+    //  例如: 增加分数,增加攻击力等
+}
+/// @brief  渲染物品道具
+void SceneMain::renderItems()
+{
+    /// 遍历物品列表中的所有物品道具
+    for (auto item : items)
+    {
+        // 计算物品在屏幕上的位置
+        SDL_Rect itemRect = {
+            static_cast<int>(item->position.x),
+            static_cast<int>(item->position.y),
+            item->width,
+            item->height,
+        };
+        // 渲染物品道具
+        SDL_RenderCopy(game.getRenderer(), item->texture, nullptr, &itemRect);
     }
 }

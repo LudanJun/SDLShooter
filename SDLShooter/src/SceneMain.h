@@ -69,12 +69,24 @@ public:
     SDL_FPoint getDirection(Enemy *enemy);
 
     // 敌机爆炸函数
-    void enemyExplosion(Enemy *enemy);
+    void enemyExplode(Enemy *enemy);
     // 更新爆炸效果
     void updateExplosions();
 
     // 渲染爆炸效果
     void renderExplosions();
+
+    // 掉落物品函数
+    void dropItem(Enemy *enemy);
+
+    // 更新掉落物品
+    void updateItems(float deltaTime);
+
+    // 玩家获取道具
+    void playerGetItem(Item *item);
+
+    // 渲染掉落物品
+    void renderItems();
 
 private:
     // 需要先在上面声明class Game;
@@ -93,12 +105,14 @@ private:
     ProjectilePlayer projectilePlayerTemplate; // 子弹模板对象 提前初始化好
     ProjectileEnemy projectileEnemyTemplate;   // 敌人飞机子弹模板对象
     Explosion explosionTemplate;               // 爆炸模板对象
+    Item itemLifeTemplate;                     // 生命道具模板对象
 
     // 创建每个物体的容器
     std::list<Enemy *> enemies;                      // 敌人飞机列表 敌人类型的指针列表
     std::list<ProjectilePlayer *> projectilesPlayer; // 玩家子弹容器
     std::list<ProjectileEnemy *> projectilesEnemy;   // 敌人子弹容器
     std::list<Explosion *> explosions;               // 爆炸容器
+    std::list<Item *> items;                         // 道具物品容器 所有物品都可以放在这个容器里
 };
 
 #endif // SCENE_MAIN_H
