@@ -18,6 +18,23 @@ SceneMain ::~SceneMain()
 // 1.初始化函数
 void SceneMain::init()
 {
+    // 初始化 加载背景音乐
+    bgm = Mix_LoadMUS("assets/music/03_Racing_Through_Asteroids_Loop.ogg");
+    if (bgm == nullptr)
+    {
+        // 如果加载失败，打印错误信息
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Failed to load background music: %s", Mix_GetError());
+    }
+    // 播放 背景音乐
+    Mix_PlayMusic(bgm, -1);
+
+    // 读取音效资源
+    sounds["player_shoot"] = Mix_LoadWAV("assets/sound/laser_shoot4.wav"); // 玩家射击音效
+    sounds["enemy_shoot"] = Mix_LoadWAV("assets/sound/xs_laser.wav");      // 敌军射击音效
+    sounds["player_explode"] = Mix_LoadWAV("assets/sound/explosion1.wav"); // 玩家爆炸音效
+    sounds["enemy_explode"] = Mix_LoadWAV("assets/sound/explosion3.wav");  // 敌军爆炸音效
+    sounds["hit"] = Mix_LoadWAV("assets/sound/eff11.wav");                 // 命中音效
+    sounds["get_item"] = Mix_LoadWAV("assets/sound/eff5.wav");             // 获取道具音效
     // 初始化随机数引擎
     std::random_device rd;                                    // 获取随机数种子
     gen = std::mt19937(rd());                                 // 使用随机数种子初始化随机数生成器
@@ -129,9 +146,19 @@ void SceneMain::handleEvent(SDL_Event *event)
     // TODO: 处理事件
 }
 
-// 清空屏幕
+// 清理资源
 void SceneMain::clean()
 {
+    for (auto sound : sounds)
+    {
+        // sound.second 是Mix_Chunk*类型的音效指针 map的value类型
+        if (sound.second != nullptr) // 检查音效是否为空
+        {
+            Mix_FreeChunk(sound.second); // 释放音效资源
+        }
+    }
+    sounds.clear(); // 清空音效列表
+
     // 循环清理玩家发射的子弹实例
     for (auto &projectile : projectilesPlayer)
     {
@@ -216,6 +243,13 @@ void SceneMain::clean()
     {
         SDL_DestroyTexture(itemLifeTemplate.texture); // 销毁生命物品纹理
     }
+
+    // 清理音乐资源
+    if (bgm != nullptr)
+    {
+        Mix_HaltMusic();    // 停止音乐播放
+        Mix_FreeMusic(bgm); // 释放音乐资源
+    }
 }
 
 // SceneMain类中的keyboardControl函数，用于处理键盘控制
@@ -297,6 +331,12 @@ void SceneMain::shootPlayer()
     // 同时也可以提高游戏性能，避免频繁的内存分配和释放操作
     // 注意：在实际游戏中，可能还需要处理子弹的碰撞检测、生命周期等逻辑
     projectilesPlayer.push_back(projectile);
+    // channel -1表示使用任意可用的通道播放音效 0通道专门是玩家发射子弹
+    // sounds是一个std::map<std::string, Mix_Chunk *>类型的容
+    // 器，用于存储音效资源
+    // player_shoot是音效资源的名称，表示玩家射击音效
+    // loops -1表示无限循环播放音效 0表示只播放一次
+    Mix_PlayChannel(0, sounds["player_shoot"], 0); // 播放玩家射击音效
 }
 
 // 更新玩家发射的子弹
@@ -354,7 +394,9 @@ void SceneMain::updatePlayerProjectiles(float deltaTime)
                     // 删除之后,it会自加
                     it = projectilesPlayer.erase(it);
                     isHit = true; // 标记子弹击中敌人
-                    break;        // 跳出循环
+                    // 播放命中音效
+                    Mix_PlayChannel(-1, sounds["hit"], 0);
+                    break; // 跳出循环
                 }
             }
             // 如果子弹没有击中任何敌人，则继续遍历下一个子弹实例
@@ -458,7 +500,7 @@ void SceneMain::updateEnemies(float deltaTime)
             // 如果玩家没死亡继续发射子弹
             if (currentTime - enemy->lastShotTime > enemy->coolDown && isDead == false)
             {
-                shootEnemy(enemy);                 // 调用敌人射击函数
+                shootEnemy(enemy);                 // 调用敌人射击函数 添加音效
                 enemy->lastShotTime = currentTime; // 更新敌人上次射击时间
             }
             // 检查敌人是否死亡
@@ -534,6 +576,8 @@ void SceneMain::updateEnemyProjectiles(float deltaTime)
                 // 如果有碰撞 就把子弹删除
                 delete projectile;
                 it = projectilesEnemy.erase(it);
+                // 播放命中音效
+                Mix_PlayChannel(-1, sounds["hit"], 0);
             }
             else
             {
@@ -562,9 +606,13 @@ void SceneMain::updatePlayer()
         // 设置爆炸位置
         explosion->position.x = player.position.x + player.width / 2 - explosion->width / 2;
         explosion->position.y = player.position.y + player.height / 2 - explosion->height / 2;
-        explosion->startTime = currentTime; // 设置爆炸特效的开始时间
-        explosions.push_back(explosion);    // 将爆炸特效添加到爆炸容器中
-        return;                             // 直接返回,不再更新玩家飞机
+        explosion->startTime = currentTime;               // 设置爆炸特效的开始时间
+        explosions.push_back(explosion);                  // 将爆炸特效添加到爆炸容器中
+        Mix_PlayChannel(-1, sounds["player_explode"], 0); // 播放玩家爆炸音效
+
+        // 停止背景音乐
+        Mix_HaltMusic(); // 停止背景音乐
+        return;          // 直接返回,不再更新玩家飞机
     }
     // 进行玩家飞机与敌机的碰撞检测
     // 玩家生命值-1 ,敌机直接爆炸
@@ -621,6 +669,8 @@ void SceneMain::shootEnemy(Enemy *enemy)
     projectile->direction = getDirection(enemy); // 获取敌人子弹的方向
     projectilesEnemy.push_back(projectile);      // 将新创建的敌人子弹实例 添加到敌人子弹列表中
     // SDL_Log("Enemy projectile shot from position: (%.2f, %.2f)", projectile->position.x, projectile->position.y);
+    // 播放敌人射击音效
+    Mix_PlayChannel(-1, sounds["enemy_shoot"], 0); // 播放敌人射击音效
 }
 
 // 获取敌人子弹方向
@@ -656,6 +706,8 @@ void SceneMain::enemyExplode(Enemy *enemy)
     explosion->startTime = currentTime;
     // 将新创建的爆炸实例添加到爆炸容器中
     explosions.push_back(explosion);
+    // 播放敌人爆炸音效
+    Mix_PlayChannel(-1, sounds["enemy_explode"], 0);
     // 根据概率掉落物品道具 50%概率掉落物品
     // 使用随机数生成器生成一个0到1之间的随机数
     // 如果生成的随机数小于0.5，则掉落物品
@@ -816,7 +868,8 @@ void SceneMain::updateItems(float deltaTime)
                 player.height,
             };
             // 检查物品与玩家飞机是否发生碰撞
-            if (SDL_HasIntersection(&itemRect, &playerRect))
+            // 玩家死亡不能拾取物品
+            if (SDL_HasIntersection(&itemRect, &playerRect) && isDead == false)
             {
                 // 如果发生碰撞 玩具获取道具
                 // 因为在迭代器里面, 所以只在获取道具函数里处理道具逻辑
@@ -848,6 +901,8 @@ void SceneMain::playerGetItem(Item *item)
         }
         SDL_Log("Player gained a life! Current health: %d", player.currentHealth);
     }
+    // 拾取物品音效
+    Mix_PlayChannel(-1, sounds["get_item"], 0); // 播放拾取物品音效
     // TODO: 可以添加其他物品类型的处理逻辑
     //  例如: 增加分数,增加攻击力等
 }

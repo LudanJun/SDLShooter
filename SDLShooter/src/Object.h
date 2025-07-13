@@ -30,7 +30,7 @@ struct Player
     int speed = 300;         // 玩家飞机的速度 初始化为0
     int currentHealth = 3;   ///< 玩家飞机的当前生命值
     int maxHealth = 3;       ///< 玩家飞机的最大生命值
-    Uint32 coolDown = 300;   ///< 玩家飞机的冷却时间  500ms射击一次
+    Uint32 coolDown = 100;   ///< 玩家飞机的冷却时间  200ms射击一次
     Uint32 lastShotTime = 0; ///< 玩家飞机上次射击的时间戳
 };
 // 敌机

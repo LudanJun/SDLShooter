@@ -1,7 +1,9 @@
 #include "Game.h"
 #include "SceneMain.h"
-#include <SDL.h>
-#include <SDL_image.h>
+#include <SDL.h>       // SDL库
+#include <SDL_image.h> // 加载图片
+#include <SDL_mixer.h> // 音频
+#include <SDL_ttf.h>   // 字体
 Game::Game()
 {
 }
@@ -77,6 +79,31 @@ void Game::init()
         isRunning = false; // 初始化SDL_image失败，设置游戏运行状态为false
     }
 
+    // 初始化SDL_mixer
+    if (Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG) != (MIX_INIT_MP3 | MIX_INIT_OGG))
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL_mixer could not initialize! Mix_Error: %s\n", Mix_GetError());
+        isRunning = false; // 初始化SDL_mixer失败，设置游戏运行状态为false
+    }
+    // 打开音频设备
+    // 44100：采样率
+    // MIX_DEFAULT_FORMAT：音频格式
+    // 2：声道数
+    // 2048：缓冲区大小
+    // 这里的缓冲区大小可以根据需要调整
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL_mixer could not open audio! Mix_Error: %s\n", Mix_GetError());
+        isRunning = false; // 初始化SDL_mixer失败，设置游戏运行状态为false
+    }
+    // 设置音效channel数量
+    Mix_AllocateChannels(32);
+    // 设置音量 MIX_MAX_VOLUME=128
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 6);
+    // 设置音效的音量
+    // channel:-1表示所有通道 默认8个音效 超过8个音效会覆盖
+    Mix_Volume(-1, MIX_MAX_VOLUME / 8);
+
     currentScene = new SceneMain(); // 创建一个新的场景对象
     currentScene->init();           // 初始化当前场景
 }
@@ -84,13 +111,16 @@ void Game::init()
 // 清理游戏
 void Game::clean()
 {
-    if (currentScene != nullptr)// 检查当前场景是否为空
+    if (currentScene != nullptr) // 检查当前场景是否为空
     {
         currentScene->clean(); // 清理当前场景
         delete currentScene;   // 删除当前场景对象
     }
     // 清理SDL_image
     IMG_Quit();
+    // 清理SDL_mixer
+    Mix_CloseAudio(); // 关闭音频设备
+    Mix_Quit();       // 退出SDL_mixer
     // 清理游戏资源
     SDL_DestroyRenderer(renderer); // 销毁渲染器
     SDL_DestroyWindow(window);     // 销毁窗口

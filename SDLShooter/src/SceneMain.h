@@ -7,9 +7,13 @@
 #include "Scene.h"
 // 在这里引用是不想再CMake中添加Object.h的路径了一般只添加.cpp
 #include "Object.h"
-#include <list>   // 引入 list容器
-#include <random> // 引入随机数生成器
-class Game;       // 前向声明Game类
+#include <list>        // 引入 list容器
+#include <random>      // 引入随机数生成器
+#include <map>         // 引入 map容器
+#include <SDL.h>       // 引入SDL库
+#include <SDL_mixer.h> // 引入SDL_mixer库
+
+class Game; // 前向声明Game类
 // 定义一个名为ScreneMain的类，继承自Scene类
 class SceneMain : public Scene
 {
@@ -96,6 +100,7 @@ private:
     // 主场景里的初始化物体
 
     Player player;                              // 玩家飞机对象
+    Mix_Music *bgm;                             // 背景音乐对象
     bool isDead = false;                        // 玩家飞机是否死亡
     std::mt19937 gen;                           // 随机数生成器
     std::uniform_real_distribution<float> disX; // 水平位置随机分布
@@ -113,6 +118,7 @@ private:
     std::list<ProjectileEnemy *> projectilesEnemy;   // 敌人子弹容器
     std::list<Explosion *> explosions;               // 爆炸容器
     std::list<Item *> items;                         // 道具物品容器 所有物品都可以放在这个容器里
+    std::map<std::string, Mix_Chunk *> sounds;       // 存储音效容器
 };
 
 #endif // SCENE_MAIN_H
