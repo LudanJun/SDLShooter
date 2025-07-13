@@ -55,7 +55,7 @@ public:
     /// 更新敌人发射的子弹
     void updateEnemyProjectiles(float deltaTime);
     /// 更新玩家
-    void updatePlayer(float deltaTime);
+    void updatePlayer();
 
     /// 渲染敌人
     void renderEnemies();
@@ -70,45 +70,35 @@ public:
 
     // 敌机爆炸函数
     void enemyExplosion(Enemy *enemy);
+    // 更新爆炸效果
+    void updateExplosions();
+
+    // 渲染爆炸效果
+    void renderExplosions();
 
 private:
     // 需要先在上面声明class Game;
-    // 游戏对象引用
-    Game &game;
+
+    Game &game; // 游戏对象引用
 
     // 主场景里的初始化物体
-    // 玩家飞机对象
-    Player player;
-    bool isDead = false; // 玩家飞机是否死亡
 
+    Player player;                              // 玩家飞机对象
+    bool isDead = false;                        // 玩家飞机是否死亡
     std::mt19937 gen;                           // 随机数生成器
     std::uniform_real_distribution<float> disX; // 水平位置随机分布
 
-    // 创建每个敌人飞机模板对象
-    Enemy enemyTemplate;
-    // 子弹模板对象 提前初始化好
-    // 这里的projectilePlayerTemplate是一个子弹模板对象，用于创建子弹实例
-    // 通过提前初始化好子弹模板对象，可以在游戏中快速创建子弹实例
-    // 这样可以避免每次射击都重新加载纹理，提高性能
-    // 这里的子弹模板对象是一个结构体，包含了子弹的纹理、位置、尺寸和速度等属性
-    ProjectilePlayer projectilePlayerTemplate;
-    // 敌人飞机子弹模板对象
-    ProjectileEnemy projectileEnemyTemplate;
+    // 创建每个物体的模版
+    Enemy enemyTemplate;                       // 创建每个敌人飞机模板对象
+    ProjectilePlayer projectilePlayerTemplate; // 子弹模板对象 提前初始化好
+    ProjectileEnemy projectileEnemyTemplate;   // 敌人飞机子弹模板对象
+    Explosion explosionTemplate;               // 爆炸模板对象
 
-    // 敌人飞机列表
-    std::list<Enemy *> enemies; // 敌人类型的指针列表
-    // 玩家子弹容器
-    // 子弹列表
-    // 这里的projectilesPlayer是一个子弹列表，用于存储玩家飞机射出的子弹实例
-    // 通过使用列表容器，可以方便地管理和遍历子弹实例
-    // 这样可以实现子弹的创建、更新和渲染等功能
-    // 每当玩家飞机射击时，会创建一个新的子弹实例
-    // 并将其添加到子弹列表中
-    // 在游戏更新和渲染过程中，可以遍历子弹列表，对每个子弹实例进行更新和渲染操作
-    // 这样可以实现子弹的动态管理和渲染效果
-    std::list<ProjectilePlayer *> projectilesPlayer;
-    // 敌人子弹容器
-    std::list<ProjectileEnemy *> projectilesEnemy;
+    // 创建每个物体的容器
+    std::list<Enemy *> enemies;                      // 敌人飞机列表 敌人类型的指针列表
+    std::list<ProjectilePlayer *> projectilesPlayer; // 玩家子弹容器
+    std::list<ProjectileEnemy *> projectilesEnemy;   // 敌人子弹容器
+    std::list<Explosion *> explosions;               // 爆炸容器
 };
 
 #endif // SCENE_MAIN_H

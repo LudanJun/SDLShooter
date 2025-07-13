@@ -62,6 +62,13 @@ void SceneMain::init()
     SDL_QueryTexture(projectileEnemyTemplate.texture, nullptr, nullptr, &projectileEnemyTemplate.width, &projectileEnemyTemplate.height);
     projectileEnemyTemplate.width /= 4;  // 敌机子弹宽度
     projectileEnemyTemplate.height /= 4; // 敌机子弹高度
+
+    // 初始化爆炸模版
+    explosionTemplate.texture = IMG_LoadTexture(game.getRenderer(), "assets/effect/explosion.png");
+    // 获取爆炸图片的宽和高
+    SDL_QueryTexture(explosionTemplate.texture, nullptr, nullptr, &explosionTemplate.width, &explosionTemplate.height);
+    explosionTemplate.totalFrame = explosionTemplate.width / explosionTemplate.height; // 爆炸总帧数
+    explosionTemplate.width = explosionTemplate.height;                                // 爆炸宽度=高度
 }
 
 // 2.渲染函数
@@ -87,6 +94,9 @@ void SceneMain::render()
 
     // 渲染敌人飞机
     renderEnemies();
+
+    // 渲染爆炸效果
+    renderExplosions();
 }
 // 3. 更新
 void SceneMain::update(float deltaTime)
@@ -99,7 +109,8 @@ void SceneMain::update(float deltaTime)
     updateEnemyProjectiles(deltaTime);  // 更新敌人发射的子弹
     spawnEnemy();                       // 生成敌人
     updateEnemies(deltaTime);           // 更新敌人
-    updatePlayer(deltaTime);            // 更新玩家飞机
+    updatePlayer();                     // 更新玩家飞机
+    updateExplosions();                 // 更新爆炸效果
 }
 
 // 处理事件
@@ -143,6 +154,16 @@ void SceneMain::clean()
     }
     projectilesEnemy.clear(); // 清空敌人子弹列表
 
+    // 清理爆炸效果
+    for (auto &explosion : explosions)
+    {
+        if (explosion != nullptr) // 检查爆炸效果实例是否为空
+        {
+            delete explosion; // 删除爆炸效果实例
+        }
+    }
+    explosions.clear(); // 清空爆炸效果列表
+
     // 清理玩家飞机
     if (player.texture != nullptr)
     {
@@ -163,6 +184,12 @@ void SceneMain::clean()
     if (projectileEnemyTemplate.texture != nullptr)
     {
         SDL_DestroyTexture(projectileEnemyTemplate.texture); // 销毁敌人子弹纹理
+    }
+
+    // 清理爆炸效果纹理
+    if (explosionTemplate.texture != nullptr)
+    {
+        SDL_DestroyTexture(explosionTemplate.texture); // 销毁爆炸效果纹理
     }
 }
 
@@ -492,7 +519,7 @@ void SceneMain::updateEnemyProjectiles(float deltaTime)
 }
 
 // 更新玩家
-void SceneMain::updatePlayer(float deltaTime)
+void SceneMain::updatePlayer()
 {
     if (isDead)
     {
@@ -502,8 +529,17 @@ void SceneMain::updatePlayer(float deltaTime)
     {
         // TODO: 实现玩家死亡后的逻辑
         // 例如: 游戏结束,切换场景等
-        isDead = true;              // 设置玩家死亡标志
-        SDL_Log("Player is dead!"); // 打印玩家死亡信息
+        auto currentTime = SDL_GetTicks(); // 获取当前时间戳
+        isDead = true;                     // 设置玩家死亡标志
+        SDL_Log("Player is dead!");        // 打印玩家死亡信息
+        // 创建爆炸特效实例
+        auto explosion = new Explosion(explosionTemplate);
+        // 设置爆炸位置
+        explosion->position.x = player.position.x + player.width / 2 - explosion->width / 2;
+        explosion->position.y = player.position.y + player.height / 2 - explosion->height / 2;
+        explosion->startTime = currentTime; // 设置爆炸特效的开始时间
+        explosions.push_back(explosion);    // 将爆炸特效添加到爆炸容器中
+        return;                             // 直接返回,不再更新玩家飞机
     }
     // 进行玩家飞机与敌机的碰撞检测
     // 玩家生命值-1 ,敌机直接爆炸
@@ -578,8 +614,75 @@ SDL_FPoint SceneMain::getDirection(Enemy *enemy)
 
 // 函数：敌人爆炸
 // 参数：敌人指针
+// 生成爆炸
 void SceneMain::enemyExplosion(Enemy *enemy)
 {
     // TODO: 实现敌人爆炸效果
-    delete enemy; // 删除敌人实例
+    // 添加敌机爆炸特效 需要知道敌机位置,从正中间爆炸
+    auto currentTime = SDL_GetTicks();                 // 获取当前时间戳
+    auto explosion = new Explosion(explosionTemplate); // 创建新的爆炸实例
+    // 设置爆炸位置
+    // 敌机X位置 + 敌机宽度/2 - 爆炸宽度/2
+    // 敌机Y位置 + 敌机高度/2 - 爆炸高度/2
+    // 这样可以确保爆炸效果在敌机的中心位置
+    explosion->position.x = enemy->position.x + enemy->width / 2 - explosion->width / 2;
+    explosion->position.y = enemy->position.y + enemy->height / 2 - explosion->height / 2;
+    // 把爆炸特效的时间设置为当前时间
+    explosion->startTime = currentTime;
+    // 将新创建的爆炸实例添加到爆炸容器中
+    explosions.push_back(explosion);
+    // 删除敌人实例
+    delete enemy;
+}
+/// @brief  更新爆炸效果
+/// @param deltaTime  时间增量
+void SceneMain::updateExplosions()
+{
+    // 考虑更新当前update结构体里的当前帧指向哪里,
+    // 指向的位置会决定渲染的时候贴哪个图片
+    // 如果指向的当前值已经超出了最后一帧,
+    // 我们需要把整个爆炸结构体给删除掉
+    // 需要迭代器的循环
+    auto currentTime = SDL_GetTicks(); // 获取当前时间戳
+    // 遍历爆炸容器中的所有爆炸特效
+    for (auto it = explosions.begin(); it != explosions.end();)
+    {
+        auto explosion = *it;
+        // 更新爆炸特效的当前帧
+        // 首选需要计算得到当前时间,与爆炸结构体每一个它的开始时间的差值
+        // 乘以爆炸特效的帧率除以1000,得到当前帧数
+        // explosion->FPS是每秒的帧数,1000是毫秒转换成秒
+        // 计算当前帧数
+        explosion->currentFrame = (currentTime - explosion->startTime) * explosion->FPS / 1000;
+        // 如果当前帧数已经超过了最后一帧,那么就删除这个爆炸特效
+        if (explosion->currentFrame >= explosion->totalFrame)
+        {
+            delete explosion;          // 删除爆炸特效实例
+            it = explosions.erase(it); // 从爆炸容器中删除爆炸特效实例
+        }
+        else
+        {
+            ++it; // 移动到下一个爆炸特效实例
+        }
+    }
+}
+/// @brief  渲染爆炸效果
+/// @note   渲染爆炸效果时,需要根据当前帧数来
+///         计算爆炸特效的纹理区域,然后渲染到屏幕上
+void SceneMain::renderExplosions()
+{
+    for (auto explosion : explosions)
+    { // 首选确定渲染哪个方块
+        // 计算爆炸特效的纹理区域
+        // explosion->currentFrame * explosion->frameWidth 计算当前帧的纹理区域
+        // explosion->currentFrame乘以每一帧的宽度,得到当前帧在纹理中的位置
+        SDL_Rect srcRect = {explosion->currentFrame * explosion->width, 0, explosion->width, explosion->height};
+        // 计算爆炸特效在屏幕上的位置
+        SDL_Rect dstRect = {static_cast<int>(explosion->position.x),
+                            static_cast<int>(explosion->position.y),
+                            explosion->width,
+                            explosion->height};
+        // 渲染爆炸特效
+        SDL_RenderCopy(game.getRenderer(), explosion->texture, &srcRect, &dstRect);
+    }
 }

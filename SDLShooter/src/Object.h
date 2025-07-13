@@ -17,7 +17,7 @@ struct Player
     int height = 0;
     int speed = 300;         // 玩家飞机的速度 初始化为0
     int currentHealth = 3;   ///< 玩家飞机的当前生命值
-    Uint32 coolDown = 200;   ///< 玩家飞机的冷却时间  500ms射击一次
+    Uint32 coolDown = 300;   ///< 玩家飞机的冷却时间  500ms射击一次
     Uint32 lastShotTime = 0; ///< 玩家飞机上次射击的时间戳
 };
 // 敌机
@@ -27,7 +27,7 @@ struct Enemy
     SDL_FPoint position = {0, 0};
     int width = 0;
     int height = 0;
-    int speed = 200;
+    int speed = 150;
     int currentHealth = 2;   ///< 敌机的当前生命值
     Uint32 coolDown = 2000;  ///< 敌机飞机的冷却时间  1000ms射击一次
     Uint32 lastShotTime = 0; ///< 敌机飞机上次射击的时间戳
@@ -46,7 +46,7 @@ struct ProjectilePlayer
     int width = 0;
     int height = 0;
     ///< 子弹的速度
-    int speed = 400;
+    int speed = 600;
     int damage = 1; ///< 子弹的伤害值 攻击力
 };
 
@@ -68,6 +68,19 @@ struct ProjectileEnemy
     ///< 子弹的速度
     int speed = 400;
     int damage = 1; ///< 子弹的伤害值 攻击力
+};
+
+/// @brief 爆炸结构体
+struct Explosion
+{
+    SDL_Texture *texture = nullptr; ///< 爆炸的纹理
+    SDL_FPoint position = {0, 0};   ///< 爆炸的位置
+    int width = 0;                  ///< 爆炸的宽度
+    int height = 0;                 ///< 爆炸的高度
+    int currentFrame = 0;           ///< 当前帧索引
+    int totalFrame = 0;             ///< 总帧数
+    Uint32 startTime = 0;           ///< 爆炸开始时间戳
+    Uint32 FPS = 10;                 ///< 每秒执行10帧
 };
 
 #endif // OBJECT_H
