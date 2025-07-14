@@ -3,8 +3,11 @@
 #define GAME_H
 
 #include "Scene.h"
-#include "SDL.h"
 #include "Object.h"
+#include <string>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
 
 /// @brief  游戏类
 /// 负责游戏的初始化、运行、事件处理、更新和渲染等功能
@@ -48,13 +51,13 @@ public:
     // 渲染游戏画面
     void render();
 
-    /// @brief 更新背景滚动
-    /// @param deltaTime
-    void backgroundUpdate(float deltaTime);
+    // 渲染工具函数
+    /// @brief 渲染文字
+    void renderTextCentered(std::string text, float posY, bool isTitle);
 
-    /// @brief 渲染背景
-    void renderBackground();
+    // setters函数
 
+    // getters函数
     // 获取渲染器
     SDL_Renderer *getRenderer() { return renderer; };
     // 获取窗口
@@ -71,6 +74,9 @@ private: // 私有成员
     Game(const Game &) = delete;            // 禁止拷贝构造函数
     Game &operator=(const Game &) = delete; // 禁止赋值构造函数
 
+    TTF_Font *titleFont; // 标题场景 主标题
+    TTF_Font *textFont;  // 标题场景 子标题
+
     bool isRunning = true;            // 游戏是否运行
     Scene *currentScene = nullptr;    // 保存当前游戏场景  在 run函数中切换
     SDL_Window *window = nullptr;     // 游戏窗口对象 后面常用
@@ -84,6 +90,13 @@ private: // 私有成员
 
     Background nearStars; ///< 近处星空背景
     Background farStars;  ///< 远处星空背景
+
+    /// @brief 更新背景滚动
+    /// @param deltaTime
+    void backgroundUpdate(float deltaTime);
+
+    /// @brief 渲染背景
+    void renderBackground();
 };
 
 #endif

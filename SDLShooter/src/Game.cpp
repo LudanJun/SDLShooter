@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "SceneMain.h"
+#include "SceneTitle.h"
 #include <SDL.h>       // SDL库
 #include <SDL_image.h> // 加载图片
 #include <SDL_mixer.h> // 音频
@@ -104,7 +105,6 @@ void Game::init()
     // channel:-1表示所有通道 默认8个音效 超过8个音效会覆盖
     Mix_Volume(-1, MIX_MAX_VOLUME / 8);
 
-
     // 初始化TTF
     if (TTF_Init() == -1)
     {
@@ -115,6 +115,12 @@ void Game::init()
     // 初始化背景卷轴
     // 近处星空背景
     nearStars.texture = IMG_LoadTexture(renderer, "assets/image/Stars-A.png");
+    if (nearStars.texture == NULL)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Failed to load texture! SDL_Error: %s\n", SDL_GetError());
+        isRunning = false; // 初始化背景失败，设置游戏运行状态为false
+    }
+
     // 获取纹理的宽度和高度
     SDL_QueryTexture(nearStars.texture, NULL, NULL, &nearStars.width, &nearStars.height);
     nearStars.height /= 2; // 将高度缩小一半
@@ -122,13 +128,30 @@ void Game::init()
 
     // 远处星空背景
     farStars.texture = IMG_LoadTexture(renderer, "assets/image/Stars-B.png");
+    if (farStars.texture == NULL)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Failed to load texture! SDL_Error: %s\n", SDL_GetError());
+        isRunning = false; // 初始化背景失败，设置游戏运行状态为false
+    }
+
     // 获取纹理的宽度和高度
     SDL_QueryTexture(farStars.texture, NULL, NULL, &farStars.width, &farStars.height);
-    farStars.speed = 20;            // 远处星空背景滚动速度
-    farStars.height /= 2;           // 将高度缩小一半
-    farStars.width /= 2;            // 将宽度缩小一半
-    currentScene = new SceneMain(); // 创建一个新的场景对象
-    currentScene->init();           // 初始化当前场景
+    farStars.speed = 20;  // 远处星空背景滚动速度
+    farStars.height /= 2; // 将高度缩小一半
+    farStars.width /= 2;  // 将宽度缩小一半
+
+    // 载入字体
+    titleFont = TTF_OpenFont("assets/font/VonwaonBitmap-16px.ttf", 64);
+    textFont = TTF_OpenFont("assets/font/VonwaonBitmap-16px.ttf", 32);
+    if (titleFont == nullptr || textFont == nullptr)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Failed to load font: %s\n", TTF_GetError());
+        isRunning = false;
+    }
+
+    // currentScene = new SceneMain(); // 创建一个新的场景对象
+    currentScene = new SceneTitle(); // 创建一个新的场景对象
+    currentScene->init();            // 初始化当前场景
 }
 
 // 清理游戏
@@ -146,6 +169,14 @@ void Game::clean()
     if (farStars.texture != nullptr) // 检查远处星空背景纹理是否为空
     {
         SDL_DestroyTexture(farStars.texture); // 销毁远处星空背景纹理
+    }
+    if (titleFont != nullptr)
+    {
+        TTF_CloseFont(titleFont); // 关闭标题字体
+    }
+    if (textFont != nullptr)
+    {
+        TTF_CloseFont(textFont); // 关闭文本字体
     }
 
     // 清理SDL_image
@@ -207,6 +238,31 @@ void Game::render()
     currentScene->render();
     // 显示更新
     SDL_RenderPresent(renderer);
+}
+
+// 游戏类中的renderTextCentered函数，用于渲染文本
+void Game::renderTextCentered(std::string text, float posY, bool isTitle)
+{
+    // TODO: 实现渲染文本的功能
+    SDL_Color textColor = {255, 255, 255, 255}; // 白色
+    SDL_Surface *surface;
+    if (isTitle)
+    {
+        surface = TTF_RenderUTF8_Solid(titleFont, text.c_str(), textColor); // // 使用UTF-8编码的字体 中文不会乱码
+    }
+    else
+    {
+        surface = TTF_RenderUTF8_Solid(textFont, text.c_str(), textColor);
+    }
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface); // 创建纹理
+    int y = static_cast<int>(getWindowHeight() - surface->h) * posY;        // 计算y坐标
+    SDL_Rect dstRect = {getWindowWidth() / 2 - surface->w / 2,
+                        y,
+                        surface->w,
+                        surface->h};
+    SDL_RenderCopy(renderer, texture, NULL, &dstRect); // 渲染纹理
+    SDL_DestroyTexture(texture);                       // 销毁纹理
+    SDL_FreeSurface(surface);                          // 释放表面
 }
 
 // 更新游戏背景

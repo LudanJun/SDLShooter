@@ -3,7 +3,7 @@
 #define SCENE_H
 
 #include <SDL.h>
-
+class Game; // 声明 游戏类
 /// @brief  场景基类
 /// 继承自Scene类的子类必须实现init、update、render、clean和handleEvent方法
 /// 这些方法分别用于初始化场景、更新场景状态、渲染场景、清理场景资源和处理事件
@@ -20,9 +20,9 @@ class Scene
 {
 public:
     // 构造函数，默认初始化
-    Scene() = default;
+    Scene(); 
     // 虚析构函数，用于删除Scene对象
-    virtual ~Scene() = default;
+    virtual ~Scene();
 
     // virtual:代表虚函数，子类可以重写  =0 :代表纯虚函数，子类必须实现
     virtual void init() = 0;
@@ -34,6 +34,9 @@ public:
     virtual void clean() = 0;
 
     virtual void handleEvent(SDL_Event *event) = 0;
+
+protected: // 受保护的成员变量，子类可以访问，但不能被外部访问
+    Game &game;
 };
 
 #endif

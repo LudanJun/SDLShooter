@@ -26,80 +26,18 @@ public:
 
     // 场景初始化函数
     void init() override;
-
     // 场景更新函数
     void update(float deltaTime) override;
-
     // 场景渲染函数
     void render() override;
-    //
     void handleEvent(SDL_Event *event) override;
-
     // 场景清理函数
     void clean() override;
-
-    // 键盘控制函数
-    void keyboardControl(float deltaTime);
-
-    // 玩家飞机射击函数
-    // 这里的shootPlayer函数是用来处理玩家飞机的射击逻辑
-    void shootPlayer();
-
-    /// 更新玩家子弹
-    void updatePlayerProjectiles(float deltaTime);
-
-    /// 渲染玩家子弹
-    void renderPlayerProjectiles();
-    /// 渲染敌人子弹
-    void renderEnemyProjectiles();
-
-    /// 生成敌人
-    void spawnEnemy();
-    /// 更新敌人
-    void updateEnemies(float deltaTime);
-    /// 更新敌人发射的子弹
-    void updateEnemyProjectiles(float deltaTime);
-    /// 更新玩家
-    void updatePlayer();
-
-    /// 渲染敌人
-    void renderEnemies();
-
-    // 敌人飞机射击函数 传入敌机指针
-    void shootEnemy(Enemy *enemy);
-
-    // 获取玩家飞机的方向,也就是要发射的子弹方向
-    // 传入敌机指针,去计算方向,因为玩家Player在私有成员变量里可以获取到不用传
-    // 返回值是Point
-    SDL_FPoint getDirection(Enemy *enemy);
-
-    // 敌机爆炸函数
-    void enemyExplode(Enemy *enemy);
-    // 更新爆炸效果
-    void updateExplosions();
-
-    // 渲染爆炸效果
-    void renderExplosions();
-
-    // 掉落物品函数
-    void dropItem(Enemy *enemy);
-
-    // 更新掉落物品
-    void updateItems(float deltaTime);
-
-    // 玩家获取道具
-    void playerGetItem(Item *item);
-
-    // 渲染掉落物品
-    void renderItems();
-
-    // 渲染UI血条
-    void renderUIHealth();
 
 private:
     // 需要先在上面声明class Game;
 
-    Game &game; // 游戏对象引用
+    // Game &game; // 游戏对象引用
 
     // 主场景里的初始化物体
 
@@ -127,6 +65,49 @@ private:
     std::list<Explosion *> explosions;               // 爆炸容器
     std::list<Item *> items;                         // 道具物品容器 所有物品都可以放在这个容器里
     std::map<std::string, Mix_Chunk *> sounds;       // 存储音效容器
+
+    ///--- 渲染 ---///
+    void renderPlayerProjectiles(); // 渲染玩家子弹
+
+    void renderEnemies(); // 渲染敌人
+
+    void renderEnemyProjectiles(); // 渲染敌人子弹
+
+    void renderItems(); // 渲染掉落物品
+
+    void renderUIHealth(); // 渲染UI血条
+
+    void renderExplosions(); // 渲染爆炸效果
+
+    ///--- 更新 ---///
+    void updateEnemies(float deltaTime); // 更新敌人
+
+    void updateEnemyProjectiles(float deltaTime); // 更新敌人发射的子弹
+
+    void updatePlayer(); // 更新玩家
+
+    void updatePlayerProjectiles(float deltaTime); // 更新玩家子弹
+
+    void updateExplosions(); // 更新爆炸效果
+
+    void updateItems(float deltaTime); // 更新掉落物品
+
+    void keyboardControl(float deltaTime); // 键盘控制函数
+
+    ///--- 其他 ---///
+    void shootPlayer(); // 玩家飞机射击函数
+
+    void spawnEnemy(); /// 生成敌人
+
+    void shootEnemy(Enemy *enemy); // 敌人飞机射击函数 传入敌机指针
+
+    SDL_FPoint getDirection(Enemy *enemy); // 获取玩家飞机的方向,也就是要发射的子弹方向
+
+    void enemyExplode(Enemy *enemy); // 敌机爆炸函数
+
+    void dropItem(Enemy *enemy); // 掉落物品函数
+
+    void playerGetItem(Item *item); // 玩家获取道具
 };
 
 #endif // SCENE_MAIN_H

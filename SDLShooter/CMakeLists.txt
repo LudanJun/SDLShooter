@@ -75,7 +75,10 @@ find_package(SDL2_ttf REQUIRED) # 字体包
 add_executable(${TARGET} 
             "src/main.cpp"
             "src/Game.cpp"
-            "src/SceneMain.cpp")
+            "src/Scene.cpp"
+            "src/SceneMain.cpp"
+            "src/SceneTitle.cpp"
+            )
 # add_executable(${TARGET} 
 #            main.cpp)
 # 四. 链接库

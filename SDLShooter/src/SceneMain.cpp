@@ -5,15 +5,16 @@
 #include <random>
 // 构造函数
 
-SceneMain ::SceneMain() : game(Game::getInstance())
-{
+// 在基类里实现了就不需要初始化了
+// SceneMain ::SceneMain() : game(Game::getInstance())
+// {
 
-    // 调用Game类的getInstance()方法获取Game类的实例
-}
+//     // 调用Game类的getInstance()方法获取Game类的实例
+// }
 // 析构函数，用于释放ScreneMain对象所占用的资源
-SceneMain ::~SceneMain()
-{
-}
+// SceneMain ::~SceneMain()
+// {
+// }
 
 // 1.初始化函数
 void SceneMain::init()
