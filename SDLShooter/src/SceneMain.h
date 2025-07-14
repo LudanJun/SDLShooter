@@ -14,17 +14,17 @@
 #include <SDL_mixer.h> // 引入SDL_mixer库
 #include <SDL_ttf.h>   // 引入SDL_ttf库
 
-class Game; // 前向声明Game类
-// 定义一个名为ScreneMain的类，继承自Scene类
-class SceneMain : public Scene
+class Game;                    // 前向声明Game类
+class SceneMain : public Scene // 定义一个名为ScreneMain的类，继承自Scene类
+
 {
 public:
-    // 构造函数
-    SceneMain();
-    // 析构函数
+    // // 构造函数
+    // SceneMain();
+    // // 析构函数
     ~SceneMain();
 
-    // 场景初始化函数
+    // 场景初始化函数  override 关键字表示重写基类函数
     void init() override;
     // 场景更新函数
     void update(float deltaTime) override;
@@ -46,6 +46,7 @@ private:
     SDL_Texture *uiHealth; // UI血条图标纹理
     TTF_Font *scoreFont;   // 字体对象
     int score = 0;         // 得分
+    float timerEnd = 0.0f; // 计时器
 
     bool isDead = false;                        // 玩家飞机是否死亡
     std::mt19937 gen;                           // 随机数生成器
@@ -93,6 +94,8 @@ private:
     void updateItems(float deltaTime); // 更新掉落物品
 
     void keyboardControl(float deltaTime); // 键盘控制函数
+
+    void changeSceneDelayed(float deltaTime,float delay); // 延迟切换场景 传入延迟时间
 
     ///--- 其他 ---///
     void shootPlayer(); // 玩家飞机射击函数

@@ -1,5 +1,7 @@
 #include "SceneMain.h"
 #include "Game.h"
+#include "SceneTitle.h"
+#include "SceneEnd.h"
 #include <SDL.h>
 #include <SDL_image.h>
 #include <random>
@@ -12,9 +14,9 @@
 //     // 调用Game类的getInstance()方法获取Game类的实例
 // }
 // 析构函数，用于释放ScreneMain对象所占用的资源
-// SceneMain ::~SceneMain()
-// {
-// }
+SceneMain ::~SceneMain()
+{
+}
 
 // 1.初始化函数
 void SceneMain::init()
@@ -152,6 +154,10 @@ void SceneMain::update(float deltaTime)
     updatePlayer();                     // 更新玩家飞机
     updateExplosions();                 // 更新爆炸效果
     updateItems(deltaTime);             // 更新物品道具
+    if (isDead == true)
+    {
+        changeSceneDelayed(deltaTime, 3); // 延迟3秒后切换场景
+    }
 }
 
 // 处理事件
@@ -159,6 +165,14 @@ void SceneMain::handleEvent(SDL_Event *event)
 {
 
     // TODO: 处理事件
+    if (event->type == SDL_KEYDOWN)
+    {
+        if (event->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+        {
+            auto sceneTitle = new SceneTitle();
+            game.changeScene(sceneTitle);
+        }
+    }
 }
 
 // 清理资源
@@ -333,6 +347,16 @@ void SceneMain::keyboardControl(float deltaTime)
             shootPlayer();                     // 调用射击函数
             player.lastShotTime = currentTime; // 更新上次射击时间
         }
+    }
+}
+// 延迟改变场景
+void SceneMain::changeSceneDelayed(float deltaTime, float delay)
+{
+    timerEnd += deltaTime;
+    if (timerEnd >= delay)
+    {
+        auto sceneEnd = new SceneEnd();
+        game.changeScene(sceneEnd);
     }
 }
 // 调用射击函数

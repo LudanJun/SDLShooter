@@ -78,6 +78,7 @@ add_executable(${TARGET}
             "src/Scene.cpp"
             "src/SceneMain.cpp"
             "src/SceneTitle.cpp"
+            "src/SceneEnd.cpp"
             )
 # add_executable(${TARGET} 
 #            main.cpp)

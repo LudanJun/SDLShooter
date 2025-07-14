@@ -6,10 +6,11 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
+/// 标题开始场景
 class SceneTitle : public Scene
 {
 public:
-    // virtual:代表虚函数，子类可以重写  =0 :代表纯虚函数，子类必须实现
+    // virtual:代表虚函数，子类可以重写  =0 :代表纯虚函数，子类必须实现 override:代表重写父类虚函数
     virtual void init() override;
 
     virtual void update(float deltaTime) override;
@@ -22,7 +23,8 @@ public:
 
 private:
     Mix_Music *bgm; // 背景音乐
- 
+
+    float timer = 0.0f; // 计时器
 };
 
 #endif // SCENE_TITLE_H
