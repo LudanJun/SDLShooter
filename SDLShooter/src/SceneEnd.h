@@ -1,13 +1,14 @@
 #ifndef SCENE_END_H // 头文件保护
 #define SCENE_END_H
 #include "Scene.h"
+#include <string>
 // #include <SDL.h>
 // #include <SDL_image.h>
 // #include <SDL_ttf.h>
 // #include <SDL_mixer.h>
 class SceneEnd : public Scene
 {
-
+public:
     // virtual:代表虚函数，子类可以重写  =0 :代表纯虚函数，子类必须实现 override:代表重写
     virtual void init() override;
 
@@ -18,5 +19,11 @@ class SceneEnd : public Scene
     virtual void clean() override;
 
     virtual void handleEvent(SDL_Event *event) override;
+
+private:
+    bool isTyping = true;  // true:正在输入，false:输入完成
+    std::string name = ""; // 输入的名字
+    void renderPhase1();
+    void renderPhase2();
 };
 #endif // SCENE_END_H

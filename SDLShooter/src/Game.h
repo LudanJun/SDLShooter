@@ -33,39 +33,38 @@ public:
         static Game instance; // 静态实例
         return instance;      // 返回实例引用
     };
-    // 析构函数
-    ~Game();
-    // 游戏运行
-    // run里面进行游戏主循环
-    void run();
-    // 游戏初始化
-    void init();
-    // 游戏清除
-    void clean();
-    // 场景切换
-    void changeScene(Scene *scene);
-    // 处理事件
-    void handleEvent(SDL_Event *event);
-    // 更新游戏状态
-    void update(float deltaTime);
-    // 渲染游戏画面
-    void render();
 
-    // 渲染工具函数
-    /// @brief 渲染文字
-    void renderTextCentered(std::string text, float posY, bool isTitle);
+    ~Game(); // 析构函数
+
+    void run(); // 游戏运行 run里面进行游戏主循环
+
+    void init(); // 游戏初始化
+
+    void clean(); // 游戏清除
+
+    void changeScene(Scene *scene); // 场景切换
+
+    void handleEvent(SDL_Event *event); // 处理事件
+
+    void update(float deltaTime); // 更新游戏状态
+
+    void render(); // 渲染游戏画面
+
+    void renderTextCentered(std::string text, float posY, bool isTitle); // 渲染文字工具函数
 
     // setters函数
+    void setFinalScore(int score) { finalScore = score; }; // 设置最终得分
 
     // getters函数
-    // 获取渲染器
-    SDL_Renderer *getRenderer() { return renderer; };
-    // 获取窗口
-    SDL_Window *getWindow() { return window; };
-    // 获取窗口宽度
-    int getWindowWidth() const { return windowWidth; }
-    // 获取窗口高度
-    int getWindowHeight() const { return windowHeight; }
+    SDL_Renderer *getRenderer() { return renderer; }; // 获取渲染器
+
+    SDL_Window *getWindow() { return window; }; // 获取窗口
+
+    int getWindowWidth() const { return windowWidth; } // 获取窗口宽度
+
+    int getWindowHeight() const { return windowHeight; } // 获取窗口高度
+
+    int getFinalScore() { return finalScore; }; // 获取最终得分
 
 private: // 私有成员
     // 构造函数
@@ -87,16 +86,14 @@ private: // 私有成员
     int FPS = 60;           // 帧率
     Uint32 frameTime;       // 帧开始时间
     float deltaTime;        // 帧间隔时间
+    int finalScore = 0;     // 最终得分
 
     Background nearStars; ///< 近处星空背景
     Background farStars;  ///< 远处星空背景
 
-    /// @brief 更新背景滚动
-    /// @param deltaTime
-    void backgroundUpdate(float deltaTime);
+    void backgroundUpdate(float deltaTime); // 更新背景滚动
 
-    /// @brief 渲染背景
-    void renderBackground();
+    void renderBackground(); // 渲染背景
 };
 
 #endif

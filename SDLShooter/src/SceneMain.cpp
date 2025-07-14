@@ -352,11 +352,11 @@ void SceneMain::keyboardControl(float deltaTime)
 // 延迟改变场景
 void SceneMain::changeSceneDelayed(float deltaTime, float delay)
 {
-    timerEnd += deltaTime;
-    if (timerEnd >= delay)
+    timerEnd += deltaTime; // 计时器增加
+    if (timerEnd >= delay) // 如果计时器超过延迟时间
     {
-        auto sceneEnd = new SceneEnd();
-        game.changeScene(sceneEnd);
+        auto sceneEnd = new SceneEnd(); // 创建新的场景实例
+        game.changeScene(sceneEnd);     //  切换到新的场景
     }
 }
 // 调用射击函数
@@ -624,6 +624,8 @@ void SceneMain::updateEnemyProjectiles(float deltaTime)
             {
                 // 减少玩家飞机的生命值
                 player.currentHealth -= projectile->damage;
+                SDL_Log("Player gained a life! Current health: %d", player.currentHealth);
+
                 // 如果有碰撞 就把子弹删除
                 delete projectile;
                 it = projectilesEnemy.erase(it);
@@ -660,7 +662,7 @@ void SceneMain::updatePlayer()
         explosion->startTime = currentTime;               // 设置爆炸特效的开始时间
         explosions.push_back(explosion);                  // 将爆炸特效添加到爆炸容器中
         Mix_PlayChannel(-1, sounds["player_explode"], 0); // 播放玩家爆炸音效
-
+        game.setFinalScore(score);                        // 死亡后设置最终得分
         // 停止背景音乐
         Mix_HaltMusic(); // 停止背景音乐
         return;          // 直接返回,不再更新玩家飞机
@@ -686,6 +688,7 @@ void SceneMain::updatePlayer()
         {
             // 玩家生命值-1 ,敌机直接爆炸
             player.currentHealth -= 1;
+            SDL_Log("Player gained a life! Current health: %d", player.currentHealth);
             enemy->currentHealth = 0;
         }
     }
