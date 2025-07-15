@@ -21,9 +21,12 @@ public:
     virtual void handleEvent(SDL_Event *event) override;
 
 private:
-    bool isTyping = true;  // true:正在输入，false:输入完成
-    std::string name = ""; // 输入的名字
+    bool isTyping = true;    // true:正在输入，false:输入完成
+    std::string name = "";   // 输入的名字
+    float blinkTimer = 1.0f; // 闪烁时间 每秒闪烁1次
     void renderPhase1();
     void renderPhase2();
+
+    void removeLastUTF8Char(std::string &str); // 删除最后一个UTF8字符  std::string &str 引用
 };
 #endif // SCENE_END_H

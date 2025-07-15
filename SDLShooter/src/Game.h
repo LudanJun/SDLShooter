@@ -8,7 +8,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-
+#include <map>
 /// @brief  游戏类
 /// 负责游戏的初始化、运行、事件处理、更新和渲染等功能
 /// 通过该类可以创建游戏窗口、渲染游戏场景、处理用户输入等
@@ -50,10 +50,12 @@ public:
 
     void render(); // 渲染游戏画面
 
-    void renderTextCentered(std::string text, float posY, bool isTitle); // 渲染文字工具函数
-
+    /// 渲染文字函数
+    SDL_Point renderTextCentered(std::string text, float posY, bool isTitle);     // 渲染文字工具函数
+    void renderTextPos(std::string text, int posX, int posY, bool isLeft = true); // 渲染文字工具函数
     // setters函数
     void setFinalScore(int score) { finalScore = score; }; // 设置最终得分
+    void insertLeaderBoard(int score, std::string name);   // 插入排行榜
 
     // getters函数
     SDL_Renderer *getRenderer() { return renderer; }; // 获取渲染器
@@ -64,7 +66,8 @@ public:
 
     int getWindowHeight() const { return windowHeight; } // 获取窗口高度
 
-    int getFinalScore() { return finalScore; }; // 获取最终得分
+    int getFinalScore() { return finalScore; };                                                   // 获取最终得分
+    std::multimap<int, std::string, std::greater<int>> &getLeaderBoard() { return leaderBoard; }; // 获取排行榜 返回leaderBoard的引用 效率高点加个&引用
 
 private: // 私有成员
     // 构造函数
@@ -91,9 +94,10 @@ private: // 私有成员
     Background nearStars; ///< 近处星空背景
     Background farStars;  ///< 远处星空背景
 
-    void backgroundUpdate(float deltaTime); // 更新背景滚动
+    std::multimap<int, std::string, std::greater<int>> leaderBoard; // 排行榜 std::greater<int> 从大到小排序
 
-    void renderBackground(); // 渲染背景
+    void backgroundUpdate(float deltaTime); // 更新背景滚动
+    void renderBackground();                // 渲染背景
 };
 
 #endif

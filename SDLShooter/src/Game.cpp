@@ -241,7 +241,7 @@ void Game::render()
 }
 
 // 游戏类中的renderTextCentered函数，用于渲染文本
-void Game::renderTextCentered(std::string text, float posY, bool isTitle)
+SDL_Point Game::renderTextCentered(std::string text, float posY, bool isTitle)
 {
     // TODO: 实现渲染文本的功能
     SDL_Color textColor = {255, 255, 255, 255}; // 白色
@@ -256,13 +256,38 @@ void Game::renderTextCentered(std::string text, float posY, bool isTitle)
     }
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface); // 创建纹理
     int y = static_cast<int>(getWindowHeight() - surface->h) * posY;        // 计算y坐标
-    SDL_Rect dstRect = {getWindowWidth() / 2 - surface->w / 2,
-                        y,
-                        surface->w,
-                        surface->h};
-    SDL_RenderCopy(renderer, texture, NULL, &dstRect); // 渲染纹理
-    SDL_DestroyTexture(texture);                       // 销毁纹理
-    SDL_FreeSurface(surface);                          // 释放表面
+    SDL_Rect rect = {getWindowWidth() / 2 - surface->w / 2,
+                     y,
+                     surface->w,
+                     surface->h};
+    SDL_RenderCopy(renderer, texture, NULL, &rect); // 渲染纹理
+    SDL_DestroyTexture(texture);                    // 销毁纹理
+    SDL_FreeSurface(surface);                       // 释放表面
+
+    return {rect.x + rect.w, y}; // 返回文本右上角的坐标
+}
+
+// 渲染文本位置
+//  bool isLeft在.h指定默认值后 在.cpp中可以不用指定
+void Game::renderTextPos(std::string text, int posX, int posY, bool isLeft)
+{
+    // TODO: 实现渲染文本位置的方法
+    SDL_Color textColor = {255, 255, 255, 255}; // 白色
+    SDL_Surface *surface = TTF_RenderUTF8_Solid(textFont, text.c_str(), textColor);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface); // 创建纹理
+    SDL_Rect rect;
+    if (isLeft)
+    {
+        rect = {posX, posY, surface->w, surface->h}; //
+    }
+    else
+    {
+        rect = {getWindowWidth() - posX - surface->w, posY, surface->w, surface->h};
+    }
+
+    SDL_RenderCopy(renderer, texture, NULL, &rect); // 渲染纹理
+    SDL_DestroyTexture(texture);                    // 销毁纹理
+    SDL_FreeSurface(surface);                       // 释放表面
 }
 
 // 更新游戏背景
@@ -309,5 +334,17 @@ void Game::renderBackground()
             SDL_Rect dstRect = {posX, posY, nearStars.width, nearStars.height}; // 设置渲染区域
             SDL_RenderCopy(renderer, nearStars.texture, nullptr, &dstRect);     // 渲染近处星空背景
         }
+    }
+}
+
+// 向排行榜中插入分数和玩家名字
+void Game::insertLeaderBoard(int score, std::string name)
+{
+    // TODO: 实现插入逻辑 ，确保排行榜中的分数是按降序排列的
+    leaderBoard.insert({score, name});
+
+    if (leaderBoard.size() > 10) // 排行榜最多10个
+    {
+        leaderBoard.erase(--leaderBoard.end()); // 删除最后一个元素 --leaderBoard.end() 把倒数第二个元素之后的元素全部删除
     }
 }
