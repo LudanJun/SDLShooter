@@ -39,10 +39,17 @@ void SceneTitle::render()
     }
 }
 
-// 清空场景标题
+// 清理资源
 void SceneTitle::clean()
 {
-    // 清空场景标题的代码
+
+    if (bgm != nullptr)
+    {
+        // 停止音乐
+        Mix_HaltMusic();
+        // 释放资源
+        Mix_FreeMusic(bgm);
+    }
 }
 
 // 处理场景标题的事件
