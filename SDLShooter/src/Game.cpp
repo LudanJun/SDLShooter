@@ -75,6 +75,10 @@ void Game::init()
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL could not create renderer! SDL_Error: %s\n", SDL_GetError());
         isRunning = false; // 创建渲染器失败，设置游戏运行状态为false
     }
+
+    // 设置逻辑分辨率
+    SDL_RenderSetLogicalSize(renderer, windowWidth, windowHeight);
+
     // 初始化SDL_image
     if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
     {
@@ -213,7 +217,7 @@ void Game::changeScene(Scene *scene)
     // 初始化当前场景
     currentScene->init();
 }
-
+// 处理事件问题
 void Game::handleEvent(SDL_Event *event)
 {
     while (SDL_PollEvent(event)) // 检测事件
@@ -221,6 +225,21 @@ void Game::handleEvent(SDL_Event *event)
         if (event->type == SDL_QUIT) // 检测退出事件
         {
             isRunning = false;
+        }
+        if (event->type == SDL_KEYDOWN) // 检测按键事件
+        {
+            if (event->key.keysym.scancode == SDL_SCANCODE_F4)
+            {
+                isFullScreen = !isFullScreen;
+                if (isFullScreen)
+                {
+                    SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+                }
+                else
+                {
+                    SDL_SetWindowFullscreen(window, 0);
+                }
+            }
         }
         currentScene->handleEvent(event); // 处理事件
     }
