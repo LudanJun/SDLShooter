@@ -44,6 +44,13 @@ void SceneEnd::render()
 
 void SceneEnd::clean()
 {
+    if (bgm != nullptr)
+    {
+        // 停止背景音乐
+        Mix_HaltMusic();
+        // 释放资源
+        Mix_FreeMusic(bgm);
+    }
 }
 
 void SceneEnd::handleEvent(SDL_Event *event)
