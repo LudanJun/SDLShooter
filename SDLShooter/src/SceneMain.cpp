@@ -67,8 +67,8 @@ void SceneMain::init()
 
     // 跟着图片大小来显示玩家飞机大小
     SDL_QueryTexture(player.texture, nullptr, nullptr, &player.width, &player.height);
-    player.width = player.width / 4;                                  // 玩具飞机的宽度除以6
-    player.height = player.height / 4;                                // 玩具飞机的高度除以6
+    player.width = player.width / 5;                                  // 玩具飞机的宽度除以6
+    player.height = player.height / 5;                                // 玩具飞机的高度除以6
     player.position.x = game.getWindowWidth() / 2 - player.width / 2; // 居中显示
     player.position.y = game.getWindowHeight() - player.height - 20;  // 底
 
@@ -91,7 +91,7 @@ void SceneMain::init()
     projectileEnemyTemplate.texture = IMG_LoadTexture(game.getRenderer(), "assets/image/bullet-1.png");
     // 获取敌机子弹图片的宽和高
     SDL_QueryTexture(projectileEnemyTemplate.texture, nullptr, nullptr, &projectileEnemyTemplate.width, &projectileEnemyTemplate.height);
-    projectileEnemyTemplate.width /= 4;  // 敌机子弹宽度
+    projectileEnemyTemplate.width /= 2;  // 敌机子弹宽度
     projectileEnemyTemplate.height /= 4; // 敌机子弹高度
 
     // 初始化爆炸模版
@@ -99,6 +99,7 @@ void SceneMain::init()
     // 获取爆炸图片的宽和高
     SDL_QueryTexture(explosionTemplate.texture, nullptr, nullptr, &explosionTemplate.width, &explosionTemplate.height);
     explosionTemplate.totalFrame = explosionTemplate.width / explosionTemplate.height; // 爆炸总帧数
+    explosionTemplate.height *= 2;                                                     // 爆炸高度
     explosionTemplate.width = explosionTemplate.height;                                // 爆炸宽度=高度
 
     // 初始化生命道具模版
@@ -110,6 +111,7 @@ void SceneMain::init()
 }
 
 // 2.渲染函数
+
 void SceneMain::render()
 {
     // 渲染玩家发射的子弹
@@ -819,7 +821,7 @@ void SceneMain::renderExplosions()
         // 计算爆炸特效的纹理区域
         // explosion->currentFrame * explosion->frameWidth 计算当前帧的纹理区域
         // explosion->currentFrame乘以每一帧的宽度,得到当前帧在纹理中的位置
-        SDL_Rect srcRect = {explosion->currentFrame * explosion->width, 0, explosion->width, explosion->height};
+        SDL_Rect srcRect = {explosion->currentFrame * explosion->width, 0, explosion->width / 2, explosion->height / 2};
         // 计算爆炸特效在屏幕上的位置
         SDL_Rect dstRect = {static_cast<int>(explosion->position.x),
                             static_cast<int>(explosion->position.y),

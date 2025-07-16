@@ -80,7 +80,7 @@ private: // 私有成员
     TTF_Font *textFont;  // 标题场景 子标题
 
     bool isRunning = true;            // 游戏是否运行
-    bool isFullScreen = false;          // 是否全屏 
+    bool isFullScreen = false;        // 是否全屏
     Scene *currentScene = nullptr;    // 保存当前游戏场景  在 run函数中切换
     SDL_Window *window = nullptr;     // 游戏窗口对象 后面常用
     SDL_Renderer *renderer = nullptr; // 渲染器对象 后面常用
