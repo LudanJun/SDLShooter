@@ -54,7 +54,9 @@
     "list": "cpp",
     "__config": "cpp",
     "__tree": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "fstream": "cpp",
+    "iomanip": "cpp"
   },
   "commentTranslate.hover.enabled": true,
   "C_Cpp.errorSquiggles": "enabled"

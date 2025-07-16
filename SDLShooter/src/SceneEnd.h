@@ -5,7 +5,7 @@
 // #include <SDL.h>
 // #include <SDL_image.h>
 // #include <SDL_ttf.h>
-// #include <SDL_mixer.h>
+#include <SDL_mixer.h>
 class SceneEnd : public Scene
 {
 public:
@@ -24,6 +24,7 @@ private:
     bool isTyping = true;    // true:正在输入，false:输入完成
     std::string name = "";   // 输入的名字
     float blinkTimer = 1.0f; // 闪烁时间 每秒闪烁1次
+    Mix_Music *bgm;
     void renderPhase1();
     void renderPhase2();
 

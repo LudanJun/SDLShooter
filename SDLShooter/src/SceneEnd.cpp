@@ -3,15 +3,20 @@
 #include "Game.h"
 #include <string>
 void SceneEnd::init()
-{
-    if (SDL_IsTextInputActive()) // 如果文本输入处于活动状态
+{ // 载入背景音乐
+    bgm = Mix_LoadMUS("assets/music/06_Battle_in_Space_Intro.ogg");
+    if (!bgm)
+    {
+        SDL_LogError(SDL_LOG_PRIORITY_ERROR, "Failed to load music: %s", Mix_GetError());
+    }
+    Mix_PlayMusic(bgm, -1);
+    if (!SDL_IsTextInputActive()) // 如果文本输入处于活动状态
     {
         SDL_StartTextInput(); // 启动文本输入
-
-        if (!SDL_IsTextInputActive()) // 如果启动失败
-        {
-            SDL_LogError(SDL_LOG_PRIORITY_ERROR, "Failed to start text input: %s", SDL_GetError());
-        }
+    }
+    if (!SDL_IsTextInputActive()) // 如果启动失败
+    {
+        SDL_LogError(SDL_LOG_PRIORITY_ERROR, "Failed to start text input: %s", SDL_GetError());
     }
 }
 
@@ -126,7 +131,7 @@ void SceneEnd::renderPhase2()
         std::string score = std::to_string(item.first);           // 获取分数
         game.renderTextPos(name, 100, posY);                      // 渲染名字
         game.renderTextPos(score, 100, posY, false);              // 渲染分数
-        posY += 50;
+        posY += 45;
         i++; // 更新位置
     }
     if (blinkTimer < 0.5)

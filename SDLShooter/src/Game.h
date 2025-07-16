@@ -98,6 +98,9 @@ private: // 私有成员
 
     void backgroundUpdate(float deltaTime); // 更新背景滚动
     void renderBackground();                // 渲染背景
+
+    void saveData(); // 保存数据
+    void loadData(); // 加载数据
 };
 
 #endif

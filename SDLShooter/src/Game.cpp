@@ -5,6 +5,7 @@
 #include <SDL_image.h> // 加载图片
 #include <SDL_mixer.h> // 音频
 #include <SDL_ttf.h>   // 字体
+#include <fstream>     // 文件保存与读取
 Game::Game()
 {
 }
@@ -13,6 +14,7 @@ Game::Game()
 /// 销毁自动调用
 Game::~Game()
 {
+    saveData(); // 保存数据
     // 在析构函数里调用
     clean(); // 清理游戏资源
 }
@@ -148,6 +150,8 @@ void Game::init()
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Failed to load font: %s\n", TTF_GetError());
         isRunning = false;
     }
+    // 载入得分
+    loadData();
 
     // currentScene = new SceneMain(); // 创建一个新的场景对象
     currentScene = new SceneTitle(); // 创建一个新的场景对象
@@ -334,6 +338,38 @@ void Game::renderBackground()
             SDL_Rect dstRect = {posX, posY, nearStars.width, nearStars.height}; // 设置渲染区域
             SDL_RenderCopy(renderer, nearStars.texture, nullptr, &dstRect);     // 渲染近处星空背景
         }
+    }
+}
+
+void Game::saveData()
+{
+    /// 保存得分榜的数据
+    std::ofstream file("assets/save.dat");
+    if (!file.is_open())
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "文件打开失败");
+        return;
+    }
+    for (const auto &entry : leaderBoard)
+    {
+        file << entry.first << " " << entry.second << std::endl; // 保存分数和玩家名字
+    }
+}
+
+void Game::loadData()
+{
+    std::ifstream file("assets/save.dat");
+    if (!file.is_open())
+    {
+        SDL_Log("文件打开失败");
+        return;
+    }
+    leaderBoard.clear();
+    int score;
+    std::string name;
+    while (file >> score >> name) // 读取分数和玩家名字
+    {
+        leaderBoard.insert({score, name}); // 读取分数和玩家名字
     }
 }
 
